@@ -590,9 +590,10 @@ serial queue, 즉 직렬 큐는 작업을 한번에 하나씩 처리하는 작�
 ### 진행내용
 
 <details open>
-<summary>데일리 퀴즈</summary>
+<summary>1주차 데일리 퀴즈</summary>
+
 #### 12월 6일
-<details open>
+<details>
 <summary>swift 메모리 구조의 코드, 데이터, 힙, 스택에 대해 각각 설명하시오.</summary>
 
 ##### 코드
@@ -629,20 +630,47 @@ switch문은 판별하는 표현식에 대해 모든 경우의 수를 다루어�
 nil은 값이 없는게 아닌 값이 없는 상태를 나타내는 키워드입니다.  
 어떠한 인스턴스가 nil 이라는 것은 값이 없는게 아니라 값이 없는 키워드를 나타내는 nil이 할당된 것입니다.
 </details>
+
 #### 12월 7일
 <details>
-<summary></summary>
+<summary>swift에서 switch구문의 case를 연속 실행하려면 어떤 키워드를 사용해야 하고, 예시를 간단히 서술하세요.</summary>
 
+해당 케이스에서 falltthrough를 사용하여 해당 케이스와 상관없이 무조건 다음 케이스를 실행시킨다.
+```swift
+switch value {
+case one:
+	fallthrough
+case two:
+	break
+default:
+	break
+}
+```
+</details>
+<details>
+<summary>제어전송문 4가지를 각각 쓰이는 경우와 어떻게 사용되는지 간단하게 설명하세요.</summary>
+
+##### break
+- switch : 해당 케이스에서 아무것도 실행하지 않을때 반드시 break를 입력해야 합니다.
+-  반복문 : 가장 인접한 반복문의 모든 사이클을 중지하고 반복문 다음의 문장으로 이동합니다.
+
+##### fallthrough
+- switch문에서 매칭된 값에 고려없이 무조건 다음 케이스를 실행합니다.
+
+##### continue
+- 반복문에서 다음 반복문의 싸이클로 넘어가서 계속 실행함.
+
+##### return
+- 리턴 타입이 없는 함수: 함수의 실행을 종료하고 함수를 벗어남
+- 리턴 타입이 있는 함수: return 키워드 다음의 표현식을 평가하고 값을 리턴한 후 함수의 실행을 중지하고 벗어남
+
+##### throw
+- 에러가 발생 가능하도록 정의된 함수에서 throw 키워드 다음에 정의된 에러의 타입을 리턴하면서 함수를 벗어남
 
 </details>
 <details>
-<summary></summary>
+<summary>딕셔너리의 키 값은 중복이 불가하고 Hashable 해야 한다. 여기서 Hashable이란 무엇인가?</summary>
 
-
-</details>
-<details>
-<summary></summary>
-
-
+해쉬 함수의 입력값으로 사용가능하다는 뜻이다.
 </details>
 </details>
