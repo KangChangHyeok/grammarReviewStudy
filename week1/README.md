@@ -6,7 +6,7 @@ protocol Sequence<Element> {
     func makeIterator() -> Self.Iterator
 }
 ```
-프로토콜 타입으로 선언되어 있으며, 해당 element에 대한 순차적이고 반복적인 접근을 제공하는 타입.  
+프로토콜으로 선언되어 있으며, 해당 element에 대한 순차적이고 반복적인 접근을 제공하는 타입.  
 즉 Sequence는 값의 리스트이고 각각의 값 하나를 element라고 한다.  
 
 Sequence Protocol은 기본적으로 IteratorProtocol을 채택하는 Iterator이 있고,  
