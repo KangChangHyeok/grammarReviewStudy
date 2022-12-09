@@ -589,6 +589,394 @@ serial queue, 즉 직렬 큐는 작업을 한번에 하나씩 처리하는 작�
 
 ### 진행내용
 
+#### 메인1(iOS 면접질문 정리)
+<details>
+<summary>1주차</summary>
+
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary>앱이 In-Active 상태가 되는 시나리오를 설명하시오.</summary>
+
+앱의 5가지 상태중 In-Active 상태는 foreground 상태에 진입한후 Active 상태 바로 전의 상태를 의미한다.  
+foreground 상태이기 때문에 UI가 화면에 표시되는 상태이지만, 사용자의 이벤트를 받을수 없다.  
+앱의 In-Active 상태가 일어나는 시나리오는  
+
+1. 다른 상태로 전환되기 전에 앱은 반드시 In-Active 상태를 거침.  
+2. App Switter를 하고있는 상태일때
+3. 앱 실행 도중 기기 우 상단을 쓸어내려 제어센터에 진입하는 경우
+</details>
+<details>
+<summary>scene delegate에 대해 설명하시오.</summary>
+
+iOS 13이후 한 앱에서 여러개의 화면을 지원하기 위해 전에 사용하던 window의 기능을 확장시킨 scene이 등장하였고,  
+기존에 AppDeletage에서 담당하던 역할중 UI Lifecycle 관련 역할을 sceneDelegate에서 맏게 되었음.  
+sceneDelegate에서 scene의 상태 전환에 따른 메소드를 호출한다.
+</details>
+<details>
+<summary>UIApplication 객체의 컨트롤러 역할은 어디에 구현해야 하는가?</summary>
+
+UIApplication 객체를 생성하는 UIApplicationMain 함수에서 구현해야 한다.
+</details>
+</details>
+<details>
+<summary>2주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+<details>
+<summary>3주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+<details>
+<summary>4주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+
+#### 메인2(swift 문법 내용 복습)
+
+<details>
+<summary>1주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+<details>
+<summary>2주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+<details>
+<summary>3주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+<details>
+<summary>4주차</summary>
+### Jess
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Haha
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### John
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+
+### Kyle
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
+#### 데일리 퀴즈
 <details open>
 <summary>1주차 데일리 퀴즈</summary>
 
@@ -673,8 +1061,6 @@ default:
 
 해쉬 함수의 입력값으로 사용가능하다는 뜻이다.
 </details>
-</details>
-
 #### 12월 8일
 
 <details>
@@ -698,3 +1084,38 @@ default:
 sequence는 프로토콜 타입으로 선언되어 있으며 element에 대한 순차적이고 반복적인 접근을 제공하는 타입이다.  
 우리가 흔히 사용하는 컬렉션 타입은 모두 Sequence를 채택하고 있다.
 </details>
+
+#### 12월 9일
+
+<details open>
+<summary>swift의 각 타입을 설명하세요.(Int, Float/Double, String/Character)</summary>
+
+- Int(정수형 데이터 타입)
+	- 정수 타입, 기본적으로 64비트 정수형이다.
+- Float/Double(실수형 데이터 타입)
+	- 실수 타입/ 부동 소수 타입
+	- Float
+		- 소수점 6자리까지 표현 가능 / 4바이트
+	- Double
+		- 소수점 15자리까지 표현 가능
+- String / Charater (문자형 데이터 타입)
+	- String
+		- 문자열을 저장. 큰따옴표 사용
+	- Charater
+		- 문자 한 글자를 저장. 큰따옴표 사용
+ 
+</details>
+<details>
+<summary>inout은 언제 사용하면 좋을까요?</summary>
+
+함수의 파라미터는 상수로 그 값을 변경할수 없으나, 함수에서 매개 변수의 값을 수정하고 함수 호출이 종료된 후에도 변경 사항을 유지하려고 할 경우 inout 파라미터를 사용한다.
+</details>
+<details>
+<summary>1..<3은 어떻게 for in 순환문으로 반복 순회가 가능할까요?</summary>
+
+1...3 은 Range 객체이고, Range 객체는 Sequence 프로토콜을 채택하고 있다.  
+Sequence 프로토콜은 채택한 타입의 element에 대해 순차적으로 연속적이고 반복적인 접근을 제공하는 타입이다.  
+이러한 Sequence 프로토콜을 Range 객체가 채택하고 있기 때문에 for - in 반복문에서 순회가 가능하다.
+</details>
+</details>
+
