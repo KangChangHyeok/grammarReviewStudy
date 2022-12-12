@@ -976,8 +976,9 @@ UIApplication 객체를 생성하는 UIApplicationMain 함수에서 구현해야
 <summary></summary>
 </details>
 </details>
+
 #### 데일리 퀴즈
-<details open>
+<details>
 <summary>1주차 데일리 퀴즈</summary>
 
 #### 12월 6일
@@ -1061,6 +1062,7 @@ default:
 
 해쉬 함수의 입력값으로 사용가능하다는 뜻이다.
 </details>
+
 #### 12월 8일
 
 <details>
@@ -1087,7 +1089,7 @@ sequence는 프로토콜 타입으로 선언되어 있으며 element에 대한 �
 
 #### 12월 9일
 
-<details open>
+<details>
 <summary>swift의 각 타입을 설명하세요.(Int, Float/Double, String/Character)</summary>
 
 - Int(정수형 데이터 타입)
@@ -1118,4 +1120,29 @@ Sequence 프로토콜은 채택한 타입의 element에 대해 순차적으로 �
 이러한 Sequence 프로토콜을 Range 객체가 채택하고 있기 때문에 for - in 반복문에서 순회가 가능하다.
 </details>
 </details>
+<details>
+<summary>2주차 데일리 퀴즈</summary>
 
+<details>
+<summary>12월 12일</summary>
+
+<details>
+<summary>클래스와 구조체에서 초기화의 의미에 대해 간단히 서술하시오.</summary>
+
+초기화는 클래스나 구조체의 인스턴스 생성시 생성자 메서드를 이용하여 인스턴스의 모든 프로퍼티에 값을 할당하는 것을 의미한다.
+</details>
+<details>
+<summary>저장 속성과 계산 속성의 차이를, 계산 속성을 사용하는 이유를 통해 설명하시오.</summary>
+
+저장 속성은 고유의 메모리 공간을 할당받지만, 계산속성은 실질적인 메서드 형태로 사용된다.  
+저장 속성을 상속받아 사용할 경우, 해당 속성의 값 변경이 불가능하다.  
+실질적 메서드 형태인 계산 속성을 활용하면 데이터 공간을 변경하지 않고 값을 변경하지 않고도 활용이 가능하다.
+</details>
+<details>
+<summary>Any와 AnyObject에 대하여 간단히 서술하세요.</summary>
+
+Any는 swift에서 모든 타입을 다룰수 있는 타입이고,  
+AnyObject는 클래스의 인스턴스만 다룰 수 있는 타입이다.
+</details>
+</details>
+</details>
