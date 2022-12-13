@@ -595,13 +595,121 @@ serial queue, 즉 직렬 큐는 작업을 한번에 하나씩 처리하는 작�
 
 ### Jess
 <details>
-<summary></summary>
+<summary>Bound와 Frame의 차이점에 대해 서술하시오.</summary>
+
+**Frame** 
+
+ : SuperView 좌표계에서 View의 위치와 크기를 나타낸다
+
+** SuperView : 최상위View가 아니라 한 칸 윗 계층인 View를 뜻함
+
+** frame의 orgin값 : SuperView의 원점을 (0,0) 으로 놓고 원점으로부터 얼마나 떨어져 있는가?
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fdd79d86-0d8a-4394-b91f-5b28ab7d8d8f/Untitled.png)
+
+**Bounds**
+
+: 자신의 좌표계에서 View의 위치와 크기를 나타낸다
+
+frame이 슈퍼뷰의 좌표계였다면, bounds는 자신의 좌표계 즉 자신의 원점을 (0,0) 으로 놓음
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/82bd20b3-d814-4d42-ad2a-8c5dce851e21/Untitled.png)
+
+![bounds의 size는 도형을 돌려도 바뀌지 않는다. View자체의 영역을 나타내기 때문에](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/db537043-aca1-4f27-9409-ed7344541014/Untitled.png)
+
+bounds의 size는 도형을 돌려도 바뀌지 않는다. View자체의 영역을 나타내기 때문에
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a250e725-6973-40d9-8f76-0603df022696/Untitled.png)
+
+**frame과 bounds를 언제, 어떨 때 쓰는가?**
+
+ : 위치(x,y)를 변경할 때 어떻게 차이가 나는지에 대해 알아야 한다
+
+![frame의 경우](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7d3082d7-f938-435d-ba34-d5ff4ad1528f/Untitled.png)
+
+frame의 경우
+
+![bounds의 경우](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/554918b0-4cbd-43fa-b730-211c05944c30/Untitled.png)
+
+bounds의 경우
+
+** bounds의 경우, viewport를 자체 좌표계에서 (50,50)으로 이동하는 것
+    bounds의 x, y좌표를 바꿔준다 = viewport의 x, y좌표를 바꿔준다
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/94bc7924-5897-46ed-b290-d7f252dd5b8b/Untitled.png)
+
+**Frame은 언제 사용할까**
+
+UIView의 위치, 크기를 나타낼 때 사용한다
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e7a6ac52-327f-4d26-ae28-9c06ecb55742/Untitled.png)
+
+**Bounds는 언제 사용할까**
+
+View를 회전한 후 View의 실제 크기를 알고 싶을 때 , ScrollView를 다룰 때 
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e94cfddd-f069-49a9-af91-f600a8f092cc/Untitled.png)
+
+**→ 정리**
+가장 기본적인 차이는 어떤 좌표계가 기준이 되는가 라고 할 수 있습니다. Frame의 경우에는 상위뷰의 좌표계가 기준이 되며, Bounds는 자체 좌표계가 기준이 됩니다.
+두번째의 차이는, 뷰를 회전하였을때 size의 값이 다르다는 것입니다. Frame 같은 경우 해당 뷰를 감쌀 수 있을 만큼 값이 커지지만, bounds는 변화가 없습니다.
+두 가지 대표적인 사용 예시로는, Frame은 UIView의 위치나 크기를 설정하는 경우가 있고,
+Bounds는 대표적으로 ScrollView에서 사용이 됩니다.
 </details>
 <details>
-<summary></summary>
+<summary>실제 디바이스가 없을 경우 개발 환경에서 할 수 있는 것과 없는 것을 설명하시오.</summary>
+
+**하드웨어**
+
+- 가속도 센서 기압계 센서, 주변광 센서들, GPS센서 기능을 이용할 수 없다.
+- 카메라, 마이크, 전화기능
+
+**API**
+
+- 애플 푸시알림
+- 사진, 연락처, 캘린더, 리마인더 등 개인정보 접근
+- Handoff 기능
+- MessageUI 기능
+
+**그 외**
+
+- 맥의 성능이 아이폰의 성능보다 훨씬 뛰어나 CPU나 메모리 부담이 얼마나 되는지 알 수 없다.
+- 네트워크 속도를 테스트 할 수 없다.
+- 페이스아이디의 직접적인 얼굴 인식은 안되지만 인식여부 처리는 해볼 수 있다.
 </details>
 <details>
-<summary></summary>
+<summary>앱의 콘텐츠나 데이터 자체를 저장/보관하는 특별한 객체를 무엇이라고 하는가?</summary>
+
+**UserDefaults**
+
+키 - 값으로 저장하는 인터페이스. 런타임시 개체를 이용하여 기본 데이터베이스에서 사용하는 기본값을 읽어오기 때문에 데이터베이스를 열 필요가 없다.
+
+대용량의 데이터보다 자동로그인 여부, 아이디, 환경설정에서의 설정 데이터 값과 같은 단일 데이터 등을 보관한다.
+
+**CoreData**
+
+객체 그래프를 관리하기 위한 Framework 이다.
+
+SQLite와 같이 테이블을 이용하지 않고 객체를 생성하여 데이터를 운영하기에 더 많은 저장공간과 메모리를 필요로 한다. 그렇지만 더욱 빠르게 데이터를 가져온다.
+
+Data Model을 생성한 후 Entity를 생성한다.
+
+**SQLite**
+
+Swift에서는 특별한 설치 없이 바로 사용할 수 있다. 
+C언어로 작성되어 있기에 매우 가벼운 것이 특징이며, 전체 데이터베이스를 디스크 파일 1개에 저장하고, 설정 자체가 매우 간편하기에 관리하기가 수월하다. 
+
+SQLite는 iOS, Android, Linux, Windw 등과 같이 다양한 운영체제에서 사용된다.
+
+수많은 프로세스와 스레드의 접근으로부터 안전하다.
+
+**Realm**
+
+SQLite와 같이 오픈소스이며, 모바일에 최적화된 라이브러리이다. SQLite, CoreData보다 속도가 빠르고 성능면에서 더 우수하다.
+
+많은 작업들을 처리하기 위해 코드가 많이 필요하지 않으며, 메인 스레드에서 데이터의 읽기, 쓰기 작업을 모두 할 수 있어 편리하다.
+
+대용량의 데이터에 대해 무료로 사용할 수 있으며 용량이 적고 큼에 상관없이 속도와 성능이 유지된다.
 </details>
 
 ### Haha
@@ -617,13 +725,74 @@ serial queue, 즉 직렬 큐는 작업을 한번에 하나씩 처리하는 작�
 
 ### John
 <details>
-<summary></summary>
+<summary>@Main에 대해서 설명하시오.</summary>
+
+- 프로그램 시작 시 타입을 지정하기 위한 스위프트 언어 기능
+- 스위프트 기반 iOS 언어에서는 UIkit 프레임워크에 숨겨져 있다.
+- 어플을 실행하는데에 entry point를 지정하는 UIApplicationMain의 대체.
+- UIApplicationMain과의 차이
+    - 기존 UIApplicationMain는 클래스에 한정되어 사용이 가능하다.
+        - @main은 타입 기반이기에 클래스 외에도 사용 가능하다.
+    - 기존 UIApplicationMain은 UIKit 프레임워크을 위한 속성이다. (즉 NAppKit 프레임워크를 위해선 NSApplicationMain가 필요)
+        - @main은 어떤 프레임워크든 상관없이 작동한다.
+    - @main의 장점 정리
+        - 기존보다 간편한 진입점을 제공하고 일관성을 구축한다.
+- 참고
+    - [https://barosalki.tistory.com/entry/iOS-Swift-53-main-type기반의-프로그램-진입점](https://barosalki.tistory.com/entry/iOS-Swift-53-main-type%EA%B8%B0%EB%B0%98%EC%9D%98-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%A7%84%EC%9E%85%EC%A0%90)
+    - [https://github.com/apple/swift-evolution/blob/main/proposals/0281-main-attribute.md](https://github.com/apple/swift-evolution/blob/main/proposals/0281-main-attribute.md)
 </details>
 <details>
-<summary></summary>
+<summary>앱이 foreground에 있을 때와 background에 있을 때 어떤 제약사항이 있나요?</summary>
+
+- Foreground 상태에 제약사항이 있다기 보단, background 상태에 제약사항이 존재한다는 표현이 적절하다.
+    - (Foreground의 제약사항을 구지 말하자면 저전력모드에서 애니메이션 사용을 줄이고 프레임 속도를 낮추는 등을 언급 가능)
+- background 상태의 제약사항
+    - 시스템 리소스와 메모리 공간 사용에 제약을 받는다. (더 적은 메모리 공간을 사용해야 하며 더 적은 자원을 할당받는다.)
+    - 특정 활동 제외한 경우 추가적인 실행시간을 할당받지 않는다.
+        - 추가적인 실행 시간을 할당받는 경우
+            1. AirPlay, Picture in Picture 비디오를 사용한 오디오 통신
+            2. 사용자 위치 서비스
+            3. Voice over IP
+            4. 외부 악세서리와의 통신
+            5. 블루투스 LE(Low Energy)와 통신, 혹은 디바이스를 블루투스 LE 악세서리로 변환
+            6. 서버에서의 정기적인 업데이트
+            7. Apple Push Notification 지원
+- 참고 : [https://icksw.tistory.com/178](https://icksw.tistory.com/178)
+- 추가 : 앱의 실행 상태에 따른 구분
+    - Not running : 앱이 실행되지 않고 메모리에 올라와있지 않은 상태.
+    - Foreground : 사용자가 보고 있는 화면. 시스템 리소스에 대한 우선수위가 높다.
+        - Inactive : 앱이 활성화되고 있지만 메모리에서 최우선이 아닌 경우. ex) 앱 실행 중 전화가 오는 경우. 앱에 이벤트를 전달할 수 없다.
+        - Active : 앱이 활성화된 상태. 실행되고 있는 앱이 높은 메모리 및 시스템 리로스의 우선순위를 가진다. 앱에 이벤트를 전달한다.
+    - Background :
+        - 앱이 홈화면에 들어가 사용자에게 보이지 않는 상태
+        - 보통 Suspended에 들어가기 전 짧게 머물지만, 특정 앱들의 경우 Background 상태를 지속시키는 실행을 하기도 한다.
+        - 가능한 적은 메모리 공간을 사용해야 하는 제약이 있다.
+        - 메모리 공간이 부족할 경우, 운영체제는 Foreground에게 우선권을 부여하고 Background 상태의 앱을 종료한다.
+        - Notification이나 Airplay 등의 경우는 제한된 사용시간을 할당받는다.
+    - Suspended :
+        - 앱이 Background 상태에 있으며 메모리에 남아 있으나 코드가 실행되는 상태는 아니다.
+        - 메모리가 부족할 경우 운영체제는 별도의 알림 없이 Suspended 상태의 앱을 종료한다.
+    - 참고
+        - [https://minosaekki.tistory.com/16](https://minosaekki.tistory.com/16)
 </details>
 <details>
-<summary></summary>
+<summary>상태 변화에 따라 다른 동작을 처리하기 위한 앱델리게이트 메서드들을 설명하시오.</summary>
+
+- application(_:didFinishLaunchingWithOptions:)
+    - 애플리케이션이 실행된 직후 사용자의 화면에 보여지기 직전에 호출
+- application(_:wilFinishLauchingWithOptions:)
+    - 애플리케이션이 최초 실행될 때 호출되는 메소드
+- applicationWillResignActive
+    - 애플리케이션이 InActive 상태로 전환되기 직전에 호출.
+    - task 일시정지, 타이머 비활성화, 일시정지(게임)
+- applicationWillEnterForeground
+    - 애플리케이션이 Active 상태가 되기 직전, 화면에 보여지기 직전에 호출
+- applicationDidBecomeActive
+    - 애플리케이션이 Active 상태로 전환된 후 호출
+- applicationDidEnterBackground
+    - 애플리케이션이 백그라운드 상태로 전환된 직후 호출
+- apllicationWillTerminate
+    - 애플리케이션이 종료되기 직전에 호출
 </details>
 
 ### Kyle
@@ -796,49 +965,167 @@ UIApplication 객체를 생성하는 UIApplicationMain 함수에서 구현해야
 <summary>1주차</summary>
 ### Jess
 <details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
+<summary>Optional에 대해 설명하시오.</summary>
 
-### Haha
-<details>
-<summary></summary>
+‘nil’이라는 값을 가질 수 있으면 Optional 타입이고, Optional타입을 선언할 때에는 타입 옆에 ?(물음표)를 붙인다. (nil은 값이 없음을 나타낸다.)
 </details>
 <details>
-<summary></summary>
+<summary>Optional 타입에는 .none이 있는데, 이것과 nil의 공통점 또는 차이점은?</summary>
+
+Optional.none은 옵셔널을 열거형으로 표현하여 값이 없음을 나타내는 것일 뿐이고, nil과 완벽히 동일하다. 
+ 때문에 nil을 쓸 수 있는 자리에 Optional.none으로 대체 가능하다.
 </details>
 <details>
-<summary></summary>
+<summary>Optional을 언래핑하는 4가지 방법은?</summary>
+
+1. **강제 언래핑**
+-  nil이 아닌 값이 있다는 것을 확신하고 강제로 값을 추출
+- `num!`
+2. **암시적 언래핑**
+- if문을 통해 nil이 아님을 먼저 확인 후, 강제추출 
+
+```swift
+ if num != nil {
+       print(num!)
+    }
+```
+
+1. **옵셔널 바인딩** 
+ - 바인딩이 되는 경우만 특정 작업을 하겠다는 의미
+
+```swift
+if let name = optionalName {
+    pirnt(name)
+} 
+```
+
+1. **닐 코얼레싱**
+- 옵셔널 표현식 뒤에 기본값을 제시해서, 옵셔널의 가능성을 없앰 (물음표 2개 뒤 옵셔널이 nil일 경우 대체할 수 있는 값 지정)
+- 디폴트값을 제시 가능한 경우 사용
+</details>
+<details>
+<summary>Hashable이 무엇이고, Equatable을 왜 상속해야 하는지 설명하시오.</summary>
+
+기본적으로 Hash함수에 input으로 쓰일 수 있는 타입을 Hashable하다고 한다. swift의 기본 타입은 모두 Hashable하다. hash란, 해시 함수에 의해 얻어지는 값이다. 
+
+hashValue는 어떠한 데이터를 Hash함수에 넣게 되면 반환해주는 값이다.
+
+Equatable은 값이 동일한지 아닌지를 비교할 수 있는 타입인 프로토콜이다.
+이 프로토콜을 준수하는 타입은 == 혹은 ! =을 사용하여 동등성을 비교할 수 있다.
+
+HashValue는 고유값이어야 하므로, 고유값인지 식별해줄 수 있는 ==함수가 필요하기 때문에 Equatable을 상속해야 합니다.
+</details>
+<details>
+<summary>제어전송문 4가지를 각각 쓰이는 경우와 어떻게 사용되는지 간단하게 설명하시오.</summary>
+
+1. break문
+- 반복문(for/while) : 가장 가까운 반복문 완전히 종료
+- switch문 : break-case에서 어떤 문장의 실행도 없을 때 입력하는 약속
+2. fallthrough문
+ - switch문에서 어떤 해당 case를 해당한 후, 다음 case의 해당 여부를 따지지 않고, 다음 case내부의 문장을 실행
+3. continue문
+ - 반복문에서 가장 가까운 반복의 이번 주기를 끝내고 바로 다음 주기로 넘어가서 실행
+4. return문
+ - return 타입이 없는 경우 : 해당 함수를 종료하고 벗어남
+- return 타입이 있는 경우 : return문 뒤의 표현식 평가 후, 그 값을 반환하면서 함수를 종료하고 벗어남
 </details>
 
 ### John
 <details>
-<summary></summary>
+<summary>프레임워크와 라이브러리에 대해 간략히 설명하고, 알고있는 예시를 몇 가지 알려주세요.</summary>
+
+프레임워크는 swift 기본 언어에 import하여 사용하는 기본적인 기능이며,  
+라이브러리는 프레임워크를 활용하여 쓰기 편하게 미리 구현해 놓은 기능이다.
 </details>
 <details>
-<summary></summary>
+<summary>폰노이만 컴퓨터 구조에 대해 설명해보세요</summary>
+
+개발자의 코드는 평소 하드디스크에 저장되어 있다가, 실행되는 순간 RAM으로 복사된다.  
+복사된 이 코드들은 CPU가 하나씩 실행한다.  
+또한 메모리에는 실제 모든 공간에 주소가 붙어있어 CPU에서 접근이 가능하다.
 </details>
 <details>
-<summary></summary>
+<summary>파라미터/아규먼트 차이는?</summary>
+
+파라미터는 함수의 정의에서 사용되는 인자를 호칭한다.  
+아규먼트는 실제 함수의 실행에서 입력되는 인스턴스 값.
+</details>
+<details>
+<summary>함수에서 쓰이는 제어전송 키워드 2개와 역할은?</summary>
+
+return: 함수 실행 종료. 결과값이 있는 함수일 경우 값을 반환한다.  
+throw: 에러 발생 가능 함수에서 error 타입을 반환하고 함수 종료.
+</details>
+<details>
+<summary>리턴값이 있는 함수와 없는 함수의 차이는?</summary>
+
+리턴값이 없는 함수는 CPU 제어권만 가져오지만,  
+리턴값이 있는 함수는 CPU 제어권과 더불어 값을 반환하기 위한 임시 메모리 공간을 별도로 만든다.
 </details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>swift 메모리 구조의 코드, 데이터, 힙, 스택에 대해 각각 설명하시오.</summary>
+
+- 코드
+프로젝트에서 우리가 작성하는 소스 코드가 기계어 형태로 저장.
+컴파일 타임에 저장되고, 중간에 코드가 변경되지 않도록 Read-Only 형태로 저장.
+- 데이터
+전역변수, static 변수가 저장된다.
+프로그램 시작과 동시에 할당되고, 프로그램 종료시 메모리에서 해제된다.
+실행 도중 변수 값이 변경될 수 있으니 Read-Write로 지정된다.
+- 힙
+프로그래머가 할당/해제 하는 메모리 영역
+사용하고 난 후 반드시 메모리 해제 필수! -> 안할 경우 메모리 누수가 발생.
+- 스택
+함수 호출 시 함수의 지역변수, 매개변수, 리턴 값 등등이 저장되고, 함수 종료시 저장된 메모리도 해제.
 </details>
 <details>
-<summary></summary>
+<summary>스위프트의 각 타입을 설명하세요.(Int, Float/Double, String/Character, Float/Double)</summary>
+
+### Int(정수형 타입)
+
+- 정수 타입이다. 기본적으로 64비트 정수형.
+
+### Float/Double
+
+- Float
+    - 6자리까지 소수점 표현 가능 / 4바이트
+- Double
+    - 15자리까지 소수점 표현 가능
+
+### String/Charater
+
+- String
+    - 문자열을 저장. 큰따옴표 사용
+- Charater
+    - 문자(한글자)를 저장. 큰따옴표 사용.
 </details>
 <details>
-<summary></summary>
+<summary>swift의 타입 관련 기본 문법 3가지에 대해 설명하시오(타입 주석, 타입 추론, 타입 안전성)</summary>
+
+- 타입 주석
+    - 변수를 선언하면서, 타입도 명확하게 지정하는 방식
+- 타입 추론
+    - 타입을 지정하지 않아도, 컴파일러가 타입을 유추해 저장하는 방식
+- 타입 안정성
+    - 스위프트는 데이터 타입을 명확하게 구분하여 사용한다.
+</details>
+<details>
+<summary>튜플의 개념을 설명하고, 간단한 예시를 들어보세요.</summary>
+
+튜플은 타입의 이름이 따로 지정되지 않은, 프로그래머 마음대로 만드는 타입.
+ex) var human: (String, Int, Double) = (”Jess”, 123, 12.3)
+</details>
+<details>
+<summary>array, dictionary, set의 문서에 공통적으로 등장하는 sequence는 어떤 개념인가?</summary>
+
+Sequence는 프로토콜 타입으로 구성되어 있으며, 
+채택할 경우 타입의 요소들에 대해 순차적으로 연속적인 값의 접근을 제공한다.
 </details>
 </details>
 <details>
+
 <summary>2주차</summary>
 ### Jess
 <details>
@@ -1143,6 +1430,28 @@ Sequence 프로토콜은 채택한 타입의 element에 대해 순차적으로 �
 
 Any는 swift에서 모든 타입을 다룰수 있는 타입이고,  
 AnyObject는 클래스의 인스턴스만 다룰 수 있는 타입이다.
+</details>
+</details>
+<details>
+<summary>12월 13일</summary>
+
+<details>
+<summary>Class 타입의 초기화 위임 규칙에 대해 설명해주세요.</summary>
+
+1. 서브클래스의 지정 생성자는 슈퍼클래스의 지정생성자를 반드시 호출해야 한다.
+2.  편의 생성자는 자신을 정의한 클래스의 다른 생성자를 반드시 호출해야 한다.
+3. 편의 생성자는 궁극적으로 반드시 지정 생성자를 호출해야 한다.
+</details>
+<details>
+<summary>required 키워드에 대해서 설명해보세요.</summary>
+
+클래스 상속시 필수적으로 구현해야 되는 생성자.
+</details>
+<details>
+<summary>init?()은 어떤 특징을 가지고 있고, init()과 어떤 차이가 있나요?</summary>
+
+init?()은 기존의 생성자와 다르게 초기화에 실패할수 있는 가능성을 가지고있다.  
+따라서 init?()은 초기화가 실패할 경우 nil을 반환한다.
 </details>
 </details>
 </details>
