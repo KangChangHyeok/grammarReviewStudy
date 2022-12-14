@@ -822,18 +822,11 @@ UIApplication 객체를 생성하는 UIApplicationMain 함수에서 구현해야
 </details>
 <details>
 <summary>2주차</summary>
+
 ### Jess
 <details>
 <summary></summary>
 </details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-
-### Haha
 <details>
 <summary></summary>
 </details>
@@ -854,20 +847,185 @@ UIApplication 객체를 생성하는 UIApplicationMain 함수에서 구현해야
 <details>
 <summary></summary>
 </details>
+<details>
+<summary></summary>
+</details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>App의 Not running, Inactive, Active, Background, Suspended에 대해 설명하시오.</summary>
+
+- Not running
+    - 앱이 아직 실행되지 않아 메모리에 올라가지 않은 상태.
+- lnactive
+    - 앱이 foreground 상태이지만, 이벤트를 받을 수 없는 상태.
+    - 모든 앱의 상태는 이 상태를 반드시 거쳐가야 한다.
+    - 앱 스위처 모드, 제어 센터 접근시의 상태
+- Active
+    - 앱이 foreground 상태이며, 이벤트를 받을수 있는 상태.
+- Background
+    - 앱 사용중 다른 앱을 실행하거나, 홈 화면으로 나갔을때의 상태
+- Suspended
+    - 앱이 백그라운드에 있고, 메모리에 올라가있는 상태이지만 아무런 코드가 실행되지 않는 상태.
+    - 앱이 Background인 상황에서 아무 동작도 하지 않으면 Suspended 상태로 진입한다.
 </details>
 <details>
-<summary></summary>
+<summary>NSOperationQueue 와 GCD Queue 의 차이점을 설명하시오.</summary>
+
+## 멀티스레딩을 위한 API
+
+멀티스레딩을 처리하기 위해 애플은 두가지 API를 제공하고 있다.
+
+**GCD**라는 C언어 기반의 저수준 API와 **NSOperation**이라는 Object-C기반의 고수준 API가 있다.
+
+### GCD(Grand Central Dispatch)
+
+스레드를 관리해주고 동시적으로 작업을 처리할 수 있게 해주는 저수준 API를 제공해주는 라이브러리.
+
+GCD는 멀티 코어 프로세서 시스템에 대한 응용 프로그램 지원을 최적화하기 위해 사용되는 라이브러리로,
+
+스레드 관리와 실행에 대한 책임을 운영체제 레벨로 넘겨 버림으로서 프로그래머가 쉽게 비동기적으로 작업을 처리할 수 있음.
+
+GCD에서 사용하는 Queue가 바로 **DispatchQueue**이다.
+
+### NSOperation
+
+NSOperation들을 만들어서 병렬로 실행시키는 스레드 풀을 제공한다. 
+
+Operation queue가 GCD의 일부는 아니다.
+
+### GCD Queue(DispatchQueue)
+
+- C기반 로우레벨의 API
+- Global Queue에서 QOS 우선순위를 줄 수 있다.
+- Main Queue: 메인 스레드에서 사용될 것 들을 처리, UI코드
+
+### NSOperationQueue
+
+- Objective-C 기반 고수준 API
+- GCD보다 약간의 오버헤드가 더 발생되고 느리다. But KVO 지원 및 작업취소등을 지원
+- 다양한 작업들 중에서 의존성을 추가할 수 있다
+- 재사용, 취소, 중지 가능하다
+- NSOperation을 만들어서 병렬 or 직렬로 스레드 풀을 사용가능하다.
 </details>
 <details>
-<summary></summary>
+<summary>GCD API 동작 방식과 필요성에 대해 설명하시오.</summary>
+
+### ***GCD란?***
+
+스레드를 관리해주고 동시적으로 작업을 처리할 수 있게 해주는 저수준 API를 제공해주는 라이브러리.
+
+GCD는 멀티 코어 프로세서 시스템에 대한 응용 프로그램 지원을 최적화하기 위해 사용되는 라이브러리로,
+
+스레드 관리와 실행에 대한 책임을 운영체제 레벨로 넘겨 버림으로서 프로그래머가 쉽게 비동기적으로 작업을 처리할 수 있음.
+
+### GCD의 필요성
+
+실행할 작업을 클로저의 형태로 DispatchQueue에 추가하면 GCD가 스레드를 자동으로 생성하고 실행해주고 스레드를 관리.
+
+개발자는 **내부 동작을 자세히 알 필요없이 Queue에 작업을 넘기기만 하면 되어**
+서, Thread를 직접 생성하고 관리하는 것에 비해 관리도 용이하고 성능 면에서도 좋은 결과를 얻을 수 있음.
+</details>
+<details>
+<summary>App Bundle의 구조와 역할에 대해 설명하시오.</summary>
+
+## Bundle
+
+- 실행가능한 코드와 관련 리소스(앱 아이콘, 이미지 등)를 한 공간에 묶는 디렉토리 모음
+
+## Application Bundles
+
+- 개발자들에 의해 흔히 생성되는 가장 흔한 번들
+- 앱이 정상적으로 작동하기 위해 필요한 모든 것.
+- 플랫폼에 따라 상세한 구조는 다르지만 번들을 사용하는 방법은 동일하다.
+
+### Application Bundle에 포함되어 있는 파일들
+
+### Info.plist file
+
+- 앱에 대한 구성(configuration) 정보(bundle ID, version number 등)를 포함한 파일
+
+### Excutable
+
+- 모든 앱은 실행 가능 파일이 있어야 하고 앱의 메인 진입점과 정적으로 앱 타겟에 연결된 코드가 포함한다.
+
+### Resources files:
+
+- 앱의 실행가능한 파일 밖에 데이터 파일로 존재한다. 일반적으로 이미지, 아이콘, 사운드, nib 파일, 문자열 파일, 구성 파일 등의 것들로 구성된다. 대부분의 리소스는 특정 언어와 지역에 따라 localized될 수 있으며 localized된 파일은 `lproj` 확장자를 가진 파일로 저장된다.
+- 거의 대부분 옵셔널하지만 항상 그런 것은 아니다.
+- ex) iOS앱은 보통 추가적인 아이콘 이미지를 요구한다.
+
+### Other support files
+
+- 커스텀 데이터 리소스를 iOS 앱 번들에 포함할 수 있지만 커스텀 프레임워크 또는 플러그인은 포함할 수 없다.
+
+## iOS App Bundle structure
+
+프로젝트 템플릿은 아이폰 또는 아이패드 앱의 번들에 대한 대부분의 필요한 작업을 Xcode에 의해 제공한다. 하지만 앱 번들 구조에 대한 이해는 커스텀 파일을 어디에 배치해야할지 결정하는데 도움을 준다.
+
+iOS 앱의 번들 구조는 모바일 기기의 필요에 더 초점이 맞춰져 있다. 디스크 공간을 절약하고 파일 접근을 단순화하기 위해 적은 수의 외부 디렉토리가 있는 비교적 평평한 구조를 사용한다.
+
+일반적인 iOS 앱 번들은 최상위 번들 디렉토리에서 앱 excutable과 앱에서 사용되는 리소스(앱 아이콘, 이미지, localized된 내용)로 구성된다.
+
+아래는 MyApp이라는 앱의 구조이다. 서브 디렉토리로 존재하는 파일들은 localized 파일이다. 하지만 추가 서브 디렉토리에 리소스 또는 관련 파일을 추가할 수 있다.
+
+```xml
+MyApp.app
+   MyApp
+   MyAppIcon.png
+   MySearchIcon.png
+   Info.plist
+   Default.png
+   MainWindow.nib
+   Settings.bundle
+   MySettingsIcon.png
+   iTunesArtwork
+   en.lproj
+      MyImage.png
+   fr.lproj
+      MyImage.png
+```
+
+MyApp (필수)
+
+- 앱의 코드를 포함하고 있는 실행가능한 파일이다. .app 확장자를 뗀 것이 실제 앱 프로젝트의 이름과 같다. 번들 구조에 반드시 있어야 한다.
+
+Application icons((MyAppIcon.png, MySearchIcon.png, and MySettingsIcon.png)
+
+- 앱 아이콘은 앱을 표시하는데 사용된다. 예를 들어 홈 스크린, 검색 결과 그리고 설정에서 앱이 앱의 아이콘으로 표시된다. 대부분의 경우 앱 아이콘을 꼭 포함해야 한다.
+
+Info.plist (필수)
+
+- bundle ID, 버젼 번호 등 앱에 대한 구성(configuration) 정보를 포함하고 있는 파일이다.
+
+Launch images(Default.png)
+
+- 앱의 시작 인터페이스를 보여주는 이미지.
+- 시스템은 제공된 런치 이미지 중 하나를 앱이 윈도우와 유저 인터페이스를 로드할 동안 임시로 사용한다. 만약 임시 런처 이미지가 없다면 검은 화면이 보여진다.
+
+MainWindow.nib
+
+- 앱의 main nib file은 앱 런치 시간에 앱을 로드하기 위한 기본 인터페이스 객체를 포함한다. 보통 앱의 메인 윈도우 객체와 앱 델리게이트 객체를 갖고 있다.
+
+Settings.bundle
+
+- 앱의 application-specific preferences를 포함하는 특별한 타입의 플러그인이다. 이 번들은 property list와 구성하기 윈한 다른 리소스 파일이 포함되어 있고 preference를 보여준다.
+
+Custom resource files
+
+- non-localized 리소스들은 최상위 디렉토리에 위치하고 localized 리소스는 language-specific 하위 디렉토리에 위치한다.
+
+### 정리
+
+하나의 앱을 구성하는 요소(실행파일, 리소스 등)들을 하나의 디렉토리에 모아서 번들이라는 개념으로 관리하고 있다.
+
+번들에는 필수적으로 포함되야 하는 것들과 필수는 아니지만 권장되는 요소들이 많고, 이러한 요소들은 각각의 역할이 있다.  
+출처 - https://thoonk.tistory.com/64
 </details>
 </details>
 <details>
 <summary>3주차</summary>
+
 ### Jess
 <details>
 <summary></summary>
@@ -1410,8 +1568,8 @@ Sequence 프로토콜은 채택한 타입의 element에 대해 순차적으로 �
 <details>
 <summary>2주차 데일리 퀴즈</summary>
 
-<details>
-<summary>12월 12일</summary>
+
+#### 12월 12일
 
 <details>
 <summary>클래스와 구조체에서 초기화의 의미에 대해 간단히 서술하시오.</summary>
@@ -1431,9 +1589,9 @@ Sequence 프로토콜은 채택한 타입의 element에 대해 순차적으로 �
 Any는 swift에서 모든 타입을 다룰수 있는 타입이고,  
 AnyObject는 클래스의 인스턴스만 다룰 수 있는 타입이다.
 </details>
-</details>
-<details>
-<summary>12월 13일</summary>
+
+
+#### 12월 13일
 
 <details>
 <summary>Class 타입의 초기화 위임 규칙에 대해 설명해주세요.</summary>
@@ -1453,5 +1611,29 @@ AnyObject는 클래스의 인스턴스만 다룰 수 있는 타입이다.
 init?()은 기존의 생성자와 다르게 초기화에 실패할수 있는 가능성을 가지고있다.  
 따라서 init?()은 초기화가 실패할 경우 nil을 반환한다.
 </details>
+
+#### 12월 14일
+
+<details>
+<summary>저장 속성과 계산 속성의 차이를, 계산 속성을 사용하는 이유를 통해 설명하시오.</summary>
+
+저장 속성은 클래스/구조체에서 일정 데이터 공간을 차지한다. 반면 계산 속성은 실질적인 메서드 형태이기 때문에 메모리 공간을 차지하지 않는다.  
+계산속성을 쓰는 이유는 상속시 값을 변경할수 없는 저장속성과 다르게 상속받아도 값 변경이 가능하다.  
+또한 함수실행에 비해 속성값으로 표시되기 때문에 코드의 가독성이 좋아진다.
+</details>
+<details>
+<summary>타입 속성의 뜻과 그 키워드인 static과 class의 차이는?</summary>
+
+타입 속성은 인스턴스에 포함되지 않고, 타입 자체에 속해 데이터 영역에 앱 종료시까지 계속 할당되는 속성이다.  
+타입 속성은 저장 타입 속성과 계산 타입 속성으로 나뉜다.  
+저장 타입 속성은 lazy하게 동작하기 때문에 초기값이 반드시 필요하다.  
+기본적으로 타입 속성을 선언할때 사용하는 static 키워드로 선언 할 경우 재정의가 불가능하지만, class 키워드로 대신 선언할 경우 재정의가 가능하다.(단, 저장 속성에 대해서는 엄격하게 재정의 불가능.)
+</details>
+<details>
+
+<summary>클래스를 상속받았을 때, 저장 프로퍼티는 재정의가 불가한데 계산 프로퍼티는 재정의가 가능한 이유는?</summary>
+
+실질적 메서드 형태로 저장되기 때문이다.  
+저장 프로퍼티는 힙에 값을 저장하지만, 저장 프로퍼티는 메서드 처럼 작동해 데이터 영역에 저장된 클래스의 virtual table에 배열 형태로 저장된다. 이러한 메서드들은 상속할때 항상 새로운 배열을 만들어내기 때문에 재정의가 가능하다.
 </details>
 </details>
