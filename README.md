@@ -825,30 +825,135 @@ UIApplication 객체를 생성하는 UIApplicationMain 함수에서 구현해야
 
 ### Jess
 <details>
-<summary></summary>
+<summary>Delegate란 무엇인지 설명하고, retain 되는지 안되는지 그 이유를 함께 설명하시오.</summary>
+
+Swift에서는 Delegate 패턴을 통해 특정 기능을 위임하는 것이 가능하다. 한 객체에서 모든 프로세스를 처리하기에는 가독성, 코드 재사용성 측면에서 많은 손해를 보기 때문이다
+
+Delegate는 대리자, 위임하다 라는 단어의 뜻처럼, 하나의 객체가 모든 일을 처리하는 것이 아니라 처리해야할 일 중 일부를 다른 객체에 넘기는 것을 말한다.
+위임된 책임을 캡슐화하는 프로토콜로 구현되며, 위임자가 위임된 기능을 제공하도록 보장한다.
+
+Delegate를 통해 일을 위임하는 객체들은 일을 시킬 뿐, 일이 어떻게 처리되는지 모르기 때문에 코드의 유지보수 측면에서 장점을 가지고 있다. 
+
+retain은 객체가 메모리에서 해제되지 않도록 호출되어 레퍼런스 카운트를 증가시키는데,
+Delegate는 객체끼리 참조값을 사용하기 때문에 retain이 된다.
 </details>
 <details>
-<summary></summary>
+<summary>NotificationCenter 동작 방식과 활용 방안에 대해 설명하시오.</summary>
+
+**NotificationCenter**
+
+등록된 모든 Observer에게 정보를 전달하는 메커니즘
+
+**동작방식**
+
+Notification Center
+
+- Listener (observer) : notifications를 감지
+- Sender : 필요할 때 notifications 를 보내주는 역할
+- itself : notification center 그 자체.
+
+Observer가 관찰 시작 → 작업이 발생하면 Sender가 Post → Observer selector 실행
+
+```swift
+NotificationCenter.default.addObserver(self, selector: #selector(handleNoti(_:)), name: myNoti, object: nil)
+NotificationCenter.default.post(name:"myNoti", object:" 전달할 값")
+```
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d582344b-6aac-4ea1-9fa6-6dd47ad6a550/R1280x0.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d582344b-6aac-4ea1-9fa6-6dd47ad6a550/R1280x0.png)
+
+Notification 
+
+특정 객체가 Notification Center에 등록된 이벤트를 발생시키면 해당 이벤트를 처리할 것이라고 등록된 옵저버들이 이벤트에 대한 행동을 취하는 것이 동작 방식. 
+이렇게 특정 객체가 이벤트를 발생시키는 것을 Post라고 한다. 
+NotificationCenter는 델리게이트 패턴과 함께 어플리케이션 내에서 객체가 서로 상호작용할 수 있는 방법 중 하나이다. 
+
+[https://baked-corn.tistory.com/42](https://baked-corn.tistory.com/42)
+
+**→ 정리** 
+
+**동작방식**
+
+1) 옵저버를 등록한다.
+
+2) 시스템에서 등록된 옵저버를 감시하면서 변경사항이 발생하면 1을 등록한 객체에게 알려준다. 
+
+**활용방안**
+
+다른 객체의 변경사항을 알고 싶을 때 , 예를들어 화면의 가로세로 전환 
+
+- John 추가
+    - NotificationCenter : 등록된 Observer에 정보를 뿌리는 노티피케이션 발송 메커니즘
+    - Notification : NotificationCenter를 통해 등록한 모든 옵저버에게 정보를 뿌리는 컨테이너
+    - NotificationCenter는 Notification에서 발송한 모든 Observer가 처리 완료될때까지 대기한다.(동기적) ↔ 비동기적 사용을 위해선 NotificationQueue 사용
+    - 참조 : [https://vincentgeranium.github.io/ios,/swift/2020/05/31/iOS-QnA-Summary-1.html](https://vincentgeranium.github.io/ios,/swift/2020/05/31/iOS-QnA-Summary-1.html)
+    - 대표적인 활용 사례는 키보드의 등장 여부에 따른 알림을 받아 원하는 코드를 처리할 수 있다.
+        
+        ```swift
+        NotificationCenter.default.addObserver(self, selector: #selector(textViewMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        ```
+        
+    - 참조 : [https://nsios.tistory.com/17](https://nsios.tistory.com/17)
 </details>
 <details>
-<summary></summary>
+<summary>UIKit 클래스들을 다룰 때 꼭 처리해야하는 애플리케이션 쓰레드 이름은 무엇인가?</summary>
+
+**Main Thread**
+
+`CocoaTouch` 어플리케이션은 `UIApplication`의 인스턴스가 메인스레드에 붙게 된다.
+메인스레드는 `UIApplication`으로부터 만들어지고, `UIApplication`은 앱이 처음 시작될 때 인스턴스화 되는 앱의 첫 시작 부분이다.
+
+`UIApplication`은 어플리케이션 런루프를 포함한 메인 이벤트 루프를 세팅하고, 이벤트 처리를 한다.
+
+어플리케이션의 메인이벤트 루프는 터치, 제스처같은 모든 UI이벤트들을 받는다.
 </details>
 <details>
-<summary></summary>
+<summary>자신만의 Custom View를 만들려면 어떻게 해야하는지 설명하시오.</summary>
+
+**1) Xib을 이용해서 별도의 StroyBoard처럼 관리 가능**
+
+- Xib를 생성하고 또한 별도의 UIView를 상속받은 Class를 생성한다. 그리고 Xib에서 오너로 해당 클래스를 임명하고 클래스 내에서 초기화 시, Xib파일을 불러와 뷰로 임명하는 코드를 추가하고 원하는 작업들을 StroyBoard와 동일하게 수행하면 된다.
+
+**2) UIView를 상속해서 코드로만 구현**
+
+- UIView를 상속받는 클래스를 생성해 정말 코드로만 원하는 작업들을 설정
 </details>
 
 ### John
 <details>
-<summary></summary>
+<summary>Global DispatchQueue 의 Qos 에는 어떤 종류가 있는지, 각각 어떤 의미인지 설명하시오.</summary>
+
+- Global DispatchQueue는 QoS(Qualtiy of Service)에 따라 실행할 작업의 우선순위를 6가지로 나눈다.  
+- userInteracitve : main 쓰레드에서 UI 관련 업데이트 및 애니메이션 수행. 즉각적인 반응 필요.
+- userInitiated : 사용자의 이벤트에 반응. 빠른 결과 필요.
+- default : 별다른 QoS를 설정해두지 않은 상태. userInitiative와 utility의 중간.
+- utility : 데이터 다운로드와 같이, 즉각적인 결과가 필요하지 않을 때 사용.
+- background : 백그라운드에서 동작. 백업/동기화 등과 같이 사용자가 볼 수 없는 작업.
+- unspecified : QoS를 추론해야 함을 시스템에 전달.
 </details>
 <details>
-<summary></summary>
+<summary>iOS 앱을 만들고, User Interface를 구성하는 데 필수적인 프레임워크 이름은 무엇인가?</summary>
+
+- UIKit 프레임워크.
+- 화면 구성 요소 설정 : 버튼, 슬라이더, 테이블뷰, 알림창 등 화면을 구성하는 요소
+- 사용자 이벤트 처리 : 제스처 처리, 애니메이션, 이미지/텍스트 처리
+- 주의사항 : 메인 쓰레드에서 사용할 것.
 </details>
 <details>
-<summary></summary>
+<summary>Foundation Kit은 무엇이고 포함되어 있는 클래스들은 어떤 것이 있는지 설명하시오.</summary>
+
+- Foundation Kit은 Cocoa Touch Framework에 포함된 프레임워크 중 하나.
+    - Cocoa Touch Framework : NSObject를 상속받는 모든 객체. Cocoa Framework는 맥.
+- String, Int 등의 원시 타입과 컬렉션 타입, 운영체제 서비스를 사용하여 앱의 기본적인 기능을 구현한다.
 </details>
 <details>
-<summary></summary>
+<summary>모든 View Controller 객체의 상위 클래스는 무엇이고 그 역할은 무엇인가?</summary>
+
+- UIViewController
+- 뷰 크기 조정 및 전체 인터페이스 레이아웃 관리
+- 뷰 데이터 업데이트
+- 뷰 사용자 상호작용에 응답
+- 뷰 컨트롤러간의 이동
+- 뷰 컨트롤러의 상위 클래스는 UIResponder
 </details>
 
 ### Kyle
@@ -1287,46 +1392,114 @@ Sequence는 프로토콜 타입으로 구성되어 있으며,
 <summary>2주차</summary>
 ### Jess
 <details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
+<summary>지연저장속성을 사용하는 이유?</summary>
 
-### Haha
-<details>
-<summary></summary>
+1. 메모리 공간을 많이 차지하는 이미지 등의 속성에 저장할 때, 반드시 메모리에 다 올릴 필요가 없으므로 메모리의 낭비를 막기 위해서
+2. 다른 속성들을 이용해야 할 때, 초기화 시점에 모든 속성들이 동시에 메모리 공간에 저장되므로 어떤 한가지 속성이 다른 속성에 접근할 수 없다.
+하지만, 지연 저장 속성을 사용할 경우 지연으로 저장된 속성은 먼저 초기화된 속성에 접근할 수 있게 됨
 </details>
 <details>
-<summary></summary>
+<summary>객체지향의 개념에서, 클래스가 다른 타입과 구별되는 결정적인 차별점은 무엇인가?</summary>
+
+상속성.  
+부모클래스의 속성과 메서드를 자식클래스에서 그대로 물려받는 개념이다.  
+상속을 통해 코드가 재활용되기 때문에 생산성이 높아진다.
 </details>
 <details>
-<summary></summary>
+<summary>메서드가 아닌 속성방식으로 구현하는 무슨 장점이 있을까?</summary>
+
+1. 관련이 있는 두 가지 메서드(함수)를 한번에 구현할 수 있다.
+2. 외부에서 보기에 속성 이름으로 설정이 가능하므로 보다 명확해보인다.
+3. 실제로 계산 속성의 겉 모습은 속성(변수) 형태를 가진 메서드이다.
+4. 인스턴스 외부에서 메서드를 통해 접근하려면 메서드를 여러개 구현해야 하기 때문에 코드의 가독성이 나빠진다. → 코드의 가독성을 좋게 만들 수 있다.
+</details>
+<details>
+<summary>접근제어가 필요한 이유?</summary>
+
+코드의 영역을 분리시켜서 효율적으로 관리가 가능하다. 
+또한 컴파일러가 해당 변수가 어느 범위에서만 쓰이는지를 인지하여 컴파일 시간이 줄어든다.
+</details>
+<details>
+<summary>싱글톤의 사용 예제를 간단히 말해보세요.</summary>
+
+- `**UserDefaults.standard**` 사용자 기본 설정과 같은 단일 데이터 저장소
+- `**UIApplication.shared**`  앱 실행동안, 앱을 제어하는 객체
+- `**NotificationCenter.default**` 알림을 통해, 다른 객체간에 정보 전달
 </details>
 
 ### John
 <details>
-<summary></summary>
+<summary>객체지향 프로그래밍의 단점은?</summary>
+
+- 단방향의 상속
+- 객체간 정보교환이 모두 메세지를 통해 이뤄지기 때문에, 메모리와 처리 시간에 많은 오버헤드가 발생한다.
 </details>
 <details>
-<summary></summary>
+<summary>하위 클래스가 상속받은 저장 속성을 수정할 수 없는 이유는?</summary>
+
+상속받은 저장 속성은 이미 상위 클래스의 생성자를 통해 초기화되어 있다.
 </details>
 <details>
-<summary></summary>
+<summary>클래스가 구조체보다 성능이 느린 이유는?</summary>
+
+- 클래스의 인스턴스를 만드는 것 자체가 느리다.
+    - 클래스가 생성자를 통해 초기화될 때, 힙 영역 전체를 훑어 적절한 공간을 찾아 인스턴스의 값을 저장한다.
+    - 스택프레임에 쌓인 인스턴스가 힙 영역의 주소를 저장한다.
+- 클래스의 메서드를 실행하는 것이 느리다.
+    - 클래스의 인스턴스가 힙 영역에 만들어졌다고 생각했을 때, 그 메서드를 실행하려면 데이터영역의 vtable에 저장된 메서드를 찾는 과정이 필요하다. vtable의 메서드는 코드영역의 해당 메서드 주소를 가지고 있다.
+- 메모리 구조를 관리하는 것이 느리다.
+</details>
+<details>
+<summary>Any와 any의 차이는 무엇인가?</summary>
+
+- Any는 클로저를 포함한 모든 타입을 나타낸다.
+- any는 Any 및 AnyObject와 전혀 다른 개념.
+- any는 generic 타입과 existential 타입(프로토콜을 타입 주석으로 적은 경우)의 병기를 혼돈하는 경우를 방지하기 위해 스위프트 5.6부터 고안되었다.
+- exitstential 타입은 타입 추론 위해 dynamic dispatch로 동작하기 때문에 성능의 저하를 가져올 수 있다. 따라서 개발자들에게 existential 타입으로 쓰는 것을 인지시키기 위해 any 키워드를 붙여야 한다.
+- existential 타입을 피하고 싶은 경우 제네릭 타입으로 병기하면 concrete 타입으로 static dispatch로 동작한다.
+- [https://zeddios.tistory.com/1348](https://zeddios.tistory.com/1348)
+- [https://raonnydev.tistory.com/entry/Any-AnyObject-any-언제-써야할까](https://raonnydev.tistory.com/entry/Any-AnyObject-any-%EC%96%B8%EC%A0%9C-%EC%8D%A8%EC%95%BC%ED%95%A0%EA%B9%8C)
+- [https://www.hackingwithswift.com/swift/5.6/existential-any](https://www.hackingwithswift.com/swift/5.6/existential-any)
+</details>
+<details>
+<summary>AnyClass는 어떤 클래스 타입의 인스턴스도 표현할 수 있는 AnyObject 프로토콜이자 메타타입이다 이때, 메타타입이란 무엇인가?</summary>
+
+- 메타타입은 타입의 타입이다.
+- swift에서 타입은 1. metatype (String.Type) 2. metatype의 인스턴스인 type (String.self) 3. 타입의 인스턴스 (String) 으로 나뉘어진다.
 </details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>Any와 AnyObject에 대하여 간단히 서술하세요.</summary>
+
+특정 타입을 지정하지 않고 여러 타입의 값을 할당할 수 있는 타입입니다.  
+상속 관계에 있는 타입들끼리만 타입캐스팅이 가능하지만,  해당 타입은 상속 관계 상관 없이 타입캐스팅이 가능하다.  
+Any는 swift의 모든 타입, AnyObject는 class 타입만 할당이 가능하다.
 </details>
 <details>
-<summary></summary>
+<summary>클래스와 구조체에서 초기화의 의미에 대해 간단히 서술하시오.</summary>
+
+초기화란 생성자 메서드를 실행하여 클래스나 구조체의 모든 저장 속성의 값 설정을 완료하고, 인스턴스를 생성하는것을 말한다.
 </details>
 <details>
-<summary></summary>
+<summary>확장에 대해 간단히 서술해주세요.</summary>
+
+클래스나 구조체, 열거형 타입에 추가적인 기능을 확장시키는 방법.  
+메서드를 추가하는 것만 가능하며, 저장 속성은 추가할 수 없음.  
+클래스에서 생성자를 구현하려는 경우, 편의생성자 형태만 추가 가능.
+</details>
+<details>
+<summary>상속과 확장의 차이점을  설명해주세요.</summary>
+
+클래스의 상속은 상위 클래스를 상속받아 비슷한 형태의 새로운 타입을 정의하고, 추가 기능을 구현하는 수직확장의 형태.  
+반면 확장은 기존에 존재하는 타입에 기능을 추가하는 수평확장의 형태입니다.  
+상속을 받으면 기존 기능을 재정의할 수 있지만, 확장은 재정의 할 수 없음.
+</details>
+<details>
+<summary>static과 class의 차이점을 설명해주세요.</summary>
+
+static 키워드는 타입 속성이나 메서드를 선언할때 사용한다.  
+class 키워드도 마찬가지로 static과 기능이 유사하나, class 키워드의 경우 해당 속성이나 메서드를 상속 가능하게 하여 재정의할수 있다.
 </details>
 </details>
 <details>
