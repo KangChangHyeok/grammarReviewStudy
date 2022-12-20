@@ -1853,3 +1853,64 @@ Any는 모든 타입, AnyObject는 클래스 타입만 할당 가능하다.
 편의생성자는 다른 편의생성자를 호출하거나 지정생성자를 호출해야함.
 </details>
 </details>
+<details>
+<summary>3주차 데일리 퀴즈</summary>
+
+#### 12월 19일
+<details>
+<summary>고차함수 중 flatMap과 compactMap의 차이를 설명해보세요.</summary>
+
+flatMap: 중첩된 배열을 제거하고 리턴.  
+compactMap: 옵셔널 요소 제거하고 리턴
+</details>
+<details>
+<summary>함수형 프로그래밍은 무엇인가요? Swift는 함수형 프로그래밍 언어인가요?</summary>
+
+Swift는 미리 선언된 함수들을 선언하여 사용해 부작용이 없도록 프로그래밍이 가능한 함수형 프로그래밍이다.
+</details>
+<details>
+<summary>High Order Function에 대해서 설명해보세요.</summary>
+
+입력값이나 출력값이 함수인 함수를 의미한다.
+</details>
+#### 12월 20일
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+#### 12월 21일
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+#### 12월 22일
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+#### 12월 23일
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+<details>
+<summary></summary>
+</details>
+</details>
