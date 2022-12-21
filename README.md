@@ -1894,16 +1894,29 @@ Swift는 미리 선언된 함수들을 선언하여 사용해 부작용이 없�
 구조체의 인스턴스 메서드는 기본적으로 속성값을 변경할수 없다.  
 하지만 인스턴스 메서드를 선언할 때, mutating 키워드를 붙여 선언할 경우 구조체 인스턴스의 속성 값을 변경할 수 있다.
 </details>
+
 #### 12월 21일
 <details>
-<summary></summary>
+<summary>클로저의 캡처현상에 대해 간단히 설명하시오</summary>
+
+클로저는 클로저 사용이 필요 없어질때까지 힙에 존재해야하고, 내부에서 외부에 존재하는 변수를 계속 사용해야 하기 때문에 캡처 현상이 발생.
 </details>
 <details>
-<summary></summary>
+<summary>강한 참조 사이클에 대해 설명해주세요</summary>
+
+두 객체들끼리 서로를 참조해서 발생한다. 서로를 참조해서 RC가 증가하고, RC가 계속 남아있어 메모리에서 해제되지 못하고 남아있는 현상이다.
 </details>
 <details>
-<summary></summary>
+<summary>Method Dispatch가 무엇인가요? 또한, Method Dispatch의 대표적인 두가지 타입의 특징을 간략히 설명하세요.</summary>
+
+메소드를 호출할 때 어떤 메소드를 실행할지 결정하는 과정.  
+1. 정적 디스패치  
+코드의 메서드 주소를 찾아서 동작. 실행속도에 큰 이점이 있음.  
+2. 동적 디스패치  
+참조 타입인 클래스의 메서드의 동작 방식.  
+데이터에 virtual table을 만들고 메서드를 배열로 생성, 더 많은 시간과 자원이 소모.
 </details>
+
 #### 12월 22일
 <details>
 <summary></summary>
@@ -1914,6 +1927,7 @@ Swift는 미리 선언된 함수들을 선언하여 사용해 부작용이 없�
 <details>
 <summary></summary>
 </details>
+
 #### 12월 23일
 <details>
 <summary></summary>
