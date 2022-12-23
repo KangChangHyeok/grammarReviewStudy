@@ -1133,46 +1133,167 @@ Custom resource files
 
 ### Jess
 <details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
+<summary>View 객체에 대해 설명하시오.</summary>
 
-### Haha
-<details>
-<summary></summary>
+화면에 Content표시, 그리기 및 애니메이션, 오토레이아웃, 제스처 인식 등 화면에 관한 것들을 담당하는 객체입니다.  
+View는 사용자 인터페이스의 기본 구성 요소이며 모든 조작은 main thread에서 해야합니다. 
 </details>
 <details>
-<summary></summary>
+<summary>UIView 에서 Layer 객체는 무엇이고 어떤 역할을 담당하는지 설명하시오.</summary>
+
+UIView에 CALayer 타입인 layer가 있습니다.  
+UIKit의 UIView는 레이아웃 터치 이벤트 등을 처리하지만,  
+뷰 위에 컨텐츠나 애니메이션을 그리는 작업은 직접 하지 않고 CoreAnimation에 위임합니다.  
+CoreAnimation이 바로 이 Layer를 통해서 작업을 하게 됩니다.  
+Layer를 통해서 모서리를 둥글게 만들거나 테두리 등을 만들 수 있고, 복잡한 애니메이션을 처리할 수 있습니다.
 </details>
 <details>
-<summary></summary>
+<summary>UIWindow 객체의 역할은 무엇인가?</summary>
+
+UIWindow는 UIView의 서브클래스로, rootViewController를 화면에 보여주고 이벤트를 처리하는 객체입니다.  
+사용자 인터페이스에 배경을 제공하고, 중요한 이벤트를 처리하는 객체로, 모든 View들의 컨테이너 역할을 합니다.   
+스토리보드를 사용하면 Window가 자동으로 생성되지만, 아닐 경우 직접 만들어야 합니다.  
+특별한 경우를 제외하고는 앱의 생명주기동안 단 하나의 Window만 생성되며, 가장 앞단의 ViewController가 교체되면서 화면이 변경됩니다.  
+외부 디스플레이를 사용하는 경우에는 새로운 Window를 만들어 보여주기도 합니다. 
+</details>
+<details>
+<summary>URLSession에 대해서 설명하시오.</summary>
+
+URLSession은 애플에서 자체적으로 제공하는 네트워크 통신을 위한 API이다.  
+Request와 Response의 구조로 이루어져 있다.  
+가장 먼저 세션을 만들고, Request를 생성한 후, Task를 결정하고 이후 Completion Handler나 Delegate 형태로 받아온 데이터를 사용한다.  
+URLSession은 애플에서 자체적으로 제공하는 네트워크 통신을 통한 API로,  
+URLSessionConfiguration을 통해서 생성된다.  
+Request와 Response의 구조로 이루어져 있다.   
+1) Request할 URL을 생성 후,  
+2) configutation을 통해서 HTTP 메소드에 맞는 URLSession을 만들어주고,  
+3) task를 통해 데이터를 받아와 처리해준다.  
+4) 마지막으로 task를 시작해주면 네트워크 통신이 시작된다.
 </details>
 
 ### John
 <details>
-<summary></summary>
+<summary>setNeedsLayout와 setNeedsDisplay의 차이에 대해 설명하시오.</summary>
+
+- setNeedsLayout
+    - `layoutSubviews`를 예약하는 행위 중 가장 비용이 적게 드는 방법
+    - update cycle에 view와 subview들을 가져오는 layoutSubviews()가 자동으로 실행된다.
+    - setNeedsLayout은 수동으로 layoutSubviews를 호출하는 메서드
+    - 뷰의 하위 뷰들의 레이아웃을 조정할 때 사용한다.
+- setNeedsDisplay
+    - update cycle에 draw 메서드가 호출될 때 자동으로 실행된다.
+    - 컨텐츠의 내용이나 모양이 변경될 때만 다시 그려질 수 있도록 호출해야 한다.
+- 공통점
+    - 메서드가 즉시 실행되지 않고 다음 업데이트 사이클에 변경사항 적용
+- 차이점
+    - setNeedsLayout은 layoutSubview를, setNeedsDisplay는 draw 메서드를 호출한다.
+- 추가: layoutIfNeeded
+    - postion이나 layout 값을 변경하는 코드와 실제로 변경된 값이 반영되는 시점에는 시간차가 존재한다. `setNeedsLayout`와는 동기/비동기를 통한 시간차의 차이.
+    - `setNeedsLayout`과 같이 수동으로 `layoutSubviews`를 예약하는 행위이지만 해당 예약을 바로 실행시키는 동기적으로 작동하는 메소드.
+    - update cycle이 올 때까지 기다려 `layoutSubviews`를 호출시키는 것이 아니라 그 즉시 `layoutSubviews`를 발동
+- 추가2: Main run loop란?
+    - 어플리케이션이 실행되면 iOS의 `UIApplication`이 매인 스레드에서 Main run loop를 실행시킨다.
+    - Main run loop는 돌아가면서 터치 이벤트, 위치의 변화, 디바이스의 회전 등의 각종 이벤트들을 처리한다.
+    - 발생한 이벤트들을 모두 처리하고 권한이 다시 main run loop로 돌아오게 되는 시점이 **update cycle.**
+- 출처 : [https://baked-corn.tistory.com/105](https://baked-corn.tistory.com/105)
 </details>
 <details>
-<summary></summary>
+<summary>stackView의 장점과 단점에 대해서 설명하시오.</summary>
+
+- 스택뷰 : autoLayout을 사용해 열과 행에 View들의 묶음을 배치할 수 있는 간소화된 인터페이스
+- 장점 :
+    - 오토레이아웃을 이용해 뷰들의 사이즈와 위치를 정하기 때문에 직접 설정할 Constraints가 적다.
+    - 뷰 구성의 수정이 간편해진다.
+    - 스택뷰에 들어가는 뷰가 런타임 도중 동적으로 변경될 때 기존 뷰들의 레이아웃도 자동적으로 변경된다.
+    - 출처: [https://velog.io/@eddy_song/stack-view](https://velog.io/@eddy_song/stack-view)
+- 단점 :
+    - 구성하려는 화면에 따라 때로는 개발 복잡도가 증가할 수 있다.
+    - 비렌더링뷰로서 background나 corner가 동작하지 않는다?
+        - 해결 : iOS14부터 CALayer를 사용하게 업데이트되어 해당 기능들이 동작한다.
+    - 출처 : [https://fbdlrghks123.tistory.com/6](https://fbdlrghks123.tistory.com/6)
+- 추가출처(스택뷰 공식문서정리): [https://hyunndyblog.tistory.com/148](https://hyunndyblog.tistory.com/148)
 </details>
 <details>
-<summary></summary>
+<summary>NSCache와 딕셔너리로 캐시를 구성했을때의 차이를 설명하시오.</summary>
+
+- NSCache:
+    - 메모리 캐싱에 주로 사용되는 객체
+    - 리소스가 부족하면 자동으로 삭제되는 키-밸류 쌍의 콜렉션
+- NSDictionary와 차이점
+    - 먼저 시스템 메모리를 과도하게 사용하지 않도록 하는 자동 삭제 정책을 가진다. 다른 애플리케이션에서 메모리를 필요로할 경우 이 policy가 cache에서 일부 항목을 제거한다.
+    - Thread-Safe하게 구현되어 있어 따로 lock하지 않아도 다른 스레드에서 캐시의 항목을 추가, 제거, 검색할 수 있다.
+    - NS(Mutable)Dictionary 객체와 다르게 저장된 Key 객체를 복사하지 않는다.
+- 출처: [https://inuplace.tistory.com/1050](https://inuplace.tistory.com/1050)
+</details>
+<details>
+<summary>prepareForReuse에 대해서 설명하시오.</summary>
+
+- 테이블뷰에서 셀이 재사용되기 전에(`dequeuReusableCell(withIdentifier:)`이 리턴되기 전에) 호출되어 준비시키는 메소드
+- 셀이 재사용될 때 이전 사용했던 셀의 흔적을 초기화작업해주기 위해 사용한다.
+- 셀의 content적 측면 외에 view적인 측면을 초기화해주기에 좋다.
+- 출처 : [https://varyeun.tistory.com/entry/prepareForReuse-의-사용법-쓰는-이유?category=885431](https://varyeun.tistory.com/entry/prepareForReuse-%EC%9D%98-%EC%82%AC%EC%9A%A9%EB%B2%95-%EC%93%B0%EB%8A%94-%EC%9D%B4%EC%9C%A0?category=885431)
+- 출처: [https://github.com/SwiftFrequency/iOSInterview/issues/25](https://github.com/SwiftFrequency/iOSInterview/issues/25)
+- Jess님 사용 예시
+    - 테이블뷰컨트롤러에서 빠른 속도로 스크롤을 내리고 올라오면 이미지가 제대로 보여지지 않는 문제 발생 → prepareForReuse로 해결
 </details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>UINavigationController 의 역할이 무엇인지 설명하시오.</summary>
+
+네비게이션 인터페이스에서 하나 이상의 하위 뷰 컨트롤러를 관리하는 컨테이너 뷰 컨트롤러이다.  
+네비게이션 인터페이스 에서는 한번에 하나의 화면만 표시하며,  
+ViewController를 Push/Pop 하여 보여지는 ViewController를 결정한다.  
+네비게이션 스택을 사용하여 자식 뷰 컨트롤러들을 관리한다.  
+네비게이션 스택의 첫번째 항목은 루트 뷰 컨트롤러이며 스택의 맨 아래를 나타내고,  
+마지막 항목은 현재 화면에 표시되는 최상위 뷰 컨트롤러이며 스택의 맨 위에 위치한다.
 </details>
 <details>
-<summary></summary>
+<summary>TableView의 동작 방식과 화면에 Cell을 출력하기 위해 최소한 구현해야 하는 DataSource 메서드를 설명하시오.</summary>
+
+awakeFromNib 함수를 호출하여 cell를 생성 한 후 각 섹션에 필요한 row의 갯수와 셀의 정보를 dataSource에게 요청한다. 그러면 tableView가 DataSource에 맞게 화면에 나타나게 된다.
+
+tableView를 생성하기 위해서는 필수적으로 TableViewDataSource의 2가지 함수를 구현해야 함.
+
+1. 섹션에 표시할 행의 개수를 설정하는 numberOfRowSection 함수
+2. 특정 위치에 표시할 셀을 요청하는 cellForRowAt 함수
 </details>
 <details>
-<summary></summary>
+<summary>하나의 View Controller 코드에서 여러 TableView Controller 역할을 해야 할 경우 어떻게 구분해서 구현해야 하는지 설명하시오.</summary>
+
+1. TableViewDataSource의 cellForRowAt함수의 파라미터중 tableview를 객체 비교 연산자를 통해 구분 해서 구현
+2. 테이블뷰의 태그를 등록한 후 비교해서 구분해서 구현
+</details>
+<details>
+<summary>다크모드를 지원하는 방법에 대해 설명하시오.</summary>
+
+Semantic Colors를 활용하여 색상 지정하기.
+
+- label이라는 색상 이름의 경우 텍스트 문구에 사용하는 색상을 뜻함.
+- 개발자가 색상만 지정하면 화면 모드에 따라 UIKit이 자동으로 색상 지정
+- iOS 13 이상에서 사용 가능
+
+커스텀 색상 만들기
+
+- UITraitCollection.userInterfaceStyle 속성을 가지고 판별하여 사용하기
+
+### 이미지 적용 방법
+
+이미지도 모드에 따라 적용하고 싶은 모습을 설정 가능. Image Asset Catalog를 이용한다.
+
+Apperance를 Any, Dark으로 변경하면 다크 모드일때의 이미지를 설정 가능.
+
+시스템이 해당하는 모드에 따라 자동으로 이미지 설정.
+</details>
+<details>
+<summary>추가: UIView와 UIViewController의 차이는 무엇인가?</summary>
+
+- UIVIew가 유저인터페이스의 구성요소와 그 화면이라면, UIViewController는 UIKit 앱의 뷰 계층구조를 관리하는 객체. 즉 사용자가 보는 화면의 ‘관리 기능이다’
+- UIViewController는 크게 ContentViewControlle와 ContainerViewController로 나눠진다.
+- ContentVC는 화면 구성을 구현하는 주된 유형의 VC이다.
+- ContainerVC는 하나 이상의 자식을 가진 VC로서, 자식의 화면 배치 정도에만 관여하고 실제 내용은 자식VC에서 담당한다.(ex. UINavigationController)
+- 출처: [https://velog.io/@swiftist9891/UIView-UIViewController](https://velog.io/@swiftist9891/UIView-UIViewController)
+- 공식문서를 정리해볼 것
 </details>
 </details>
 <details>
@@ -1202,6 +1323,7 @@ Custom resource files
 ### John
 <details>
 <summary></summary>
+
 </details>
 <details>
 <summary></summary>
@@ -1502,50 +1624,126 @@ static 키워드는 타입 속성이나 메서드를 선언할때 사용한다.
 class 키워드도 마찬가지로 static과 기능이 유사하나, class 키워드의 경우 해당 속성이나 메서드를 상속 가능하게 하여 재정의할수 있다.
 </details>
 </details>
-<details>
+<details open>
 <summary>3주차</summary>
 ### Jess
 <details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
+<summary>@escaping 에 대해서 간략히 서술하고, 예시를 간략히 설명하세요.</summary>
 
-### Haha
-<details>
-<summary></summary>
+- 함수의 인자로 전달된 클로저가 함수가 반환된 후 실행되는 클로저
+- 아규먼트로 받은 클로저가 함수 종료에 호출될 경우 클로저가 함수를 탈출한다 라고 표현
+- 클로저를 파라미터로 갖는 함수를 선언할 때, 파라미터 이름 콜론 뒤에 `@escaping` 키워드를 사용하여 명시하면 됨
+- **예시** 
+보통 비동기 작업을 하기 위해 클로저를 탈출시킨다. 
+가장 자주 사용하는 경우는 `Completion Handler` 이다.
+예를들어, 네트워크 요청 작업이 있다고 했을 때, 이를 비동기적으로 처리하고 이 처리가 끝난 후 동작하는 것을 `Completion Handler` 에 명령하는 것이다.
 </details>
 <details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
+<summary>defer가 호출되는 순서는 어떻게 되고, defer가 호출되지 않는 경우를 설명하시오.</summary>
 
+- 선언된 역순으로 호출되고, 선언된 코드 블럭을 빠져나가기 직전에 실행된다.
+- 호출되지 않는 경우
+    - throw를 이용해서 오류를 던질 경우
+    - guard문을 사용하여 중간에 함수를 종료하는 경우
+</details>
+<details>
+<summary>함수형 프로그래밍과 그 장점에 대해서 설명하시오.</summary>
+
+- 상태값을 갖지 않고, 순수하게 함수만으로 동작하는 것이다.  작은 문제를 해결하기 위한 함수를 작성하여 가독성을 높이고 유지보수를 용이하게 해준다. 따라서 사이드 이펙트가 없도록 한다.
+- 장점
+    - 여러가지 연산 처리 작업이 동시에 일어나는 프로그램을 짜기 쉽다.
+    - 상태변화에 따른 부작용에서 자유로워지므로 순수하게 기능 구현에 초점을 맞추어 설계가 가능하다.
+</details>
+<details>
+<summary>클로저의 캡쳐 현상과, 클로저 내의 강한 순환 참조에 대해서 간단히 설명하시오.</summary>
+
+- 클로저는 외부의 값을 캡처한다. 외부 변수가 사라져 오류가 생기는 것을 방지하기 위해 클로저는 그 값을 캡쳐해 참조한다. 이 때 Reference Counting이 일어난다.
+- 클래스의 인스턴스는 클로저를 참조하고, 클로저는 인스턴스의 변수를 참조하는 경우 서로가 서로를 참조할 때 강한 순환 참조가 일어난다.  
+이 때 weak과 unowned를 사용해 Refence Capture를 할 수 있다.
+</details>
+<details>
+<summary>제네릭에 대해 간단히 설명하시오.</summary>
+
+- “포괄적인” 이라는 뜻으로, Swift 표준 라이브러리 대부분은 제네릭으로 작성되어있다.
+- 예를들어 어떤 함수의 파라미터로 Int, String, Double과 같은 다양한 변수를 받고 싶을 때,
+`**func save<T>(_ a: inout T, _ b: inpout T) {}**` 와 같이 정의할 수 있다.
+- 이 때 <T>는 타입 파라미터 라고 불리며, T자리에는 같은 종류의 타입이 들어가야 한다.
+</details>
 ### John
 <details>
-<summary></summary>
+<summary>unowned는 객체가 사라질 경우 crash된다. 그럼에도 unowned를 사용하는 이유는?</summary>
+
+- weak는 객체가 사라지면 nil을 부여하기 때문에 객체를 계속 추적한다.
+- 따라서 참조한 객체보다 생명주기가 길 것이 확실한 경우 unowned를 사용하면 런타임 시 오버헤드를 방지할 수 있다.
+- 출처: [https://shark-sea.kr/entry/iOS-ARC-strong-weak-unowned](https://shark-sea.kr/entry/iOS-ARC-strong-weak-unowned)
 </details>
 <details>
-<summary></summary>
+<summary>@autoclosure는 무엇이며, 그 장점을 두 가지 언급하세요.</summary>
+
+- @autoclosure는 파라미터 없고 리턴값이 있는 함수를 자동적으로 클로저로 만들어주는 키워드이다.
+- 오토클로저를 사용하면
+    - 함수 파라미터에 중괄호를 작성하지 않아도 클로저로 인식되어 코드가 깔끔해질 수 있다.
+    - 실행하는 클로저의 평가지연(delay evaluation)이 가능해 계산 비용이 많이 들거나 사이드이펙트가 있는 코드에 활용할 수 있다.
+    - 출처:
 </details>
 <details>
-<summary></summary>
+<summary>모든 클로저의 파라미터에 @escaping을 붙이면 범용적으로 함수 내외부에서 모두 사용 가능하다. 하지만 함수 외부에서 사용할 때만 @escaping 키워드를 붙이는 이유는 무엇인가?</summary>
+
+- 컴파일러의 퍼포먼스 최적화 때문이다.
+- @escaping 키워드가 붙지 않을 경우 컴파일러는 클로저의 시작과 끝을 예상할 수 있기 때문에 RC 등록/해제 처리를 생략해 객체의 라이프사이클을 효율적으로 관리할 수 있다.
+- 반대로 @escaping 클로저는 클로저 밖에서 적절히 실행되도록 추가적인 RC 관리가 필요하다.
+</details>
+<details>
+<summary>프로토콜 지향 프로그래밍과 객체지향 프로그래밍 중 어느 것을 지향해야 하는가?</summary>
+
+- 다형성의 관점에서 객체지향은 상속, 오버로드, 오버로딩의 장점을 가진다.
+- 하지만 메모리 구조 전체를 상속받는 점, 하나의 클래스만 상속가능한 점, 값타입에선 사용이 불가한 점 들은 단점이 된다.
+- 프로토콜 지향 프로그래밍은 이러한 단점을 해결해줄 수 있다.
+- 그렇지만, 둘 중 하나를 정답이라고 할 수는 없다.
+- OOP와 POP는 대립적인 관계에 있는 개념이 아니다!
+- 지나친 프로토콜 남용은 가독성을 저하시켜 다른 개발자와의 협업을 방해할 수 있다.
+</details>
+<details>
+<summary>대문자 Self와 소문자 self의 차이는? 그리고 소문자 self 가 뒤에 붙는 경우는 어떤 경우인가?</summary>
+
+- 대문자 Self
+    - 특정 타입 내부에서 타입을 가리키는 경우 쓰인다.
+    - 추가적으로는 프로토콜에서 해당 프로토콜을 채택할 타입을 지칭할때도 사용
+- 소문자 self
+    - 주로 인스턴스 내부에서 인스턴스의 속성을 더 명확하게 지칭할 때 사용
+    - 단, 타입속성/메서드의 경우 타입 자체를 가리킨다.
+    - 타입 인스턴스를 나타낼때도 사용. ex) MyClass.self. 타입 인스턴스를 나타낸다는 건, 데이터 구조 중 데이터 영역을 문자로 표현하는 것.
 </details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>프로토콜을 일급 객체로 취급한다는 것은 무엇을 의미하는가?</summary>
+
+1. 프로토콜을 변수에 할당 가능
+2. 함수를 호출할 때, 프로토콜을 파라미터로 반환할 수 있음
+3. 함수에서 프로토콜을 반환할 수 있음
 </details>
 <details>
-<summary></summary>
+<summary>프로토콜의 확장이란?</summary>
+
+프로토콜을 채택한 타입에서 실제 메서드 구현을 반복해야되는 불편함을 제거하기위해 기본 구현을 제공함.
 </details>
 <details>
-<summary></summary>
+<summary>클로저의 캡처 현상이란 무엇인가요?</summary>
+
+클로저를 변수에 할당하거나, 클로저를 호출하는 순간 클로저는 자신이 참조하는 외부의 변수를 캡처하는데, 이러한 동작을 클로저의 캡처 현상이라고 한다.
+</details>
+<details>
+<summary>메모리 누수 현상에 대해 설명해주세요.</summary>
+
+강한 참조 사이클로 인해 발생하는 현상이다.  
+두개 이상의 객체가 서로를 참조하면서 RC가 떨어지지 않아 메모리에서 해제되지 않게 되고, 이를 메모리 누수 라고 말한다.  
+메모리 누수를 해결하기 위해 weak, unkowned 키워드를 사용한 약한 참조를 통해 이를 해결 할 수 있다.
+</details>
+<details>
+<summary>self와 Self의 차이를 설명해주세요.</summary>
+
+self는 인스턴스 자체를 가르키며, Self는 타입을 의미한다.
 </details>
 </details>
 <details>
