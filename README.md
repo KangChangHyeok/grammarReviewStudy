@@ -1941,12 +1941,23 @@ Self는 특정 타입 내부에서 타입을 선언하는 위치에 사용한다
 
 #### 12월 23일
 <details>
-<summary></summary>
+<summary>Delegate와 Notification 방식의 차이점에 대해 설명하시오.</summary>
+
+delegate: 1:1 방식, 하나의 객체애 대해 다양한 이벤트 처리에 용이.  
+Notification: 1:n 방식, 다수의 객체들에게 동시에 이벤트 발생을 알려줘야 할때 사용한다. NotificationCenter 싱글턴 객체로 이벤트의 발생여부를 등록한 객체들에게 post하는 방식으로 동작한다.
 </details>
 <details>
-<summary></summary>
+<summary>unowned는 객체가 사라질 경우 crash된다. 그럼에도 unowned를 사용하는 이유는?</summary>
+
+weak로 참조하는 객체는 옵셔널 타입으로 선언되어 nil을 반환할수 있기 때문에 계속 관찰하게 되어 unowned에 비해 리소스가 많이 소모된다.  
+참조하는 객체보다 생명주기가 짧을 경우나 nil값이 확실하게 되지 않는다면 unowned 키워드를 사용하여 리소스를 절약할수 있다.
 </details>
 <details>
-<summary></summary>
+<summary>@autoclosure는 무엇이며, 그 장점을 두 가지 언급하세요.</summary>
+
+@autoclosure 키워드를 사용 할 경우 함수의 인자로 전달된 표현식을 래핑하여 자동으로 클로저를 생성한다.  
+클로저를 표현하는 중괄호 없이 표현식으로만 전달하기 때문에 코드의 가독성이 높아짐.  
+내부 코드가 클로저를 호출할때까지 실행하지 않으므로 연산을 지연시켜 부작용이 있는 코드에 용이하다.
+
 </details>
 </details>
