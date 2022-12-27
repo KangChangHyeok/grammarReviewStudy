@@ -2159,3 +2159,51 @@ weak로 참조하는 객체는 옵셔널 타입으로 선언되어 nil을 반환
 
 </details>
 </details>
+<details>
+<summary>4주차 데일리 퀴즈</summary>
+
+#### 12월 26일
+
+<details>
+<summary>접근 제어의 5가지 종류는 무엇이 있나요?</summary>
+
+open - 다른 모듈에서도 접근 가능 / 상속 및 재정의도 가능
+
+public - 다른 모듈에서도 접근 가능(상속/ 재정의 불가)
+
+internal - 같은 모듈 파일 내에서만 접근 가능(디폴트)
+
+fileprivate - 같은 파일 내에서만 접근 가능
+
+private - 같은 scope내에서만 접근 가능
+</details>
+<details>
+<summary>Hashable 프로토콜에 대해서 설명해보세요.</summary>
+
+Hashable 프로토콜을 채택할 경우 해시 함수의 입력값으로 사용할 수 있다는 의미이다.
+</details>
+<details>
+<summary>강한 참조 사이클에 대해 간단히 설명하시오.</summary>
+
+두개 이상의 객체들이 서로를 참조하여 RC가 0이 되지 않는 것을 말한다.  
+강한 참조 사이클로 인해 객체들이 메모리에서 해제되지 못하여 메모리 누수를 발생시킨다.
+</details>
+
+#### 12월 27일
+
+<details>
+<summary>Result 타입은 무엇인가요?</summary>
+
+Result 타입이란 기존에 에러를 외부로 따로 던져 처리하는 것 대신 에러를 해당 타입 안에 포함시켜 함수 실행의 성공과 실패의 정보를 함께 담아서 리턴하는 타입이다.
+</details>
+<details>
+<summary>defer란 무엇인지, 언제 사용하는지에 대하여 설명하세요.</summary>
+
+해당 스코프 내에서 작업의 실행을 가장 마지막으로 미루는 구문이다.
+</details>
+<details>
+<summary>Hashable 프로토콜을 채택하는 커스텀 타입이 Equtable도 채택해야하는 이유가 무엇인가요?</summary>
+
+Hashable은 고유 값을 식별할 수 있는 “==” 함수가 필요한데, 이 함수는 Equtable 프로토콜 안에 들어있기 때문에 채택해야 한다.
+</details>
+</details>
