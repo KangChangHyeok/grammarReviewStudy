@@ -1298,49 +1298,120 @@ Apperance를 Any, Dark으로 변경하면 다크 모드일때의 이미지를 �
 </details>
 <details>
 <summary>4주차</summary>
-### Jess
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-
-### Haha
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
 
 ### John
 <details>
-<summary></summary>
+<summary>ViewController의 생명주기를 설명하시오.</summary>
 
+- VC의 4가지 생명주기
+    - Appearing : 뷰가 화면에 나타나는 중
+    - Appeared : 뷰가 화면에 나타남
+    - Disappearing : 뷰가 사라지는 중
+    - Disappeared : 뷰가 사라짐
+- VC의 생명주기 중 자동으로 호출되는 메서드
+    - viewDidLoad : 해당 뷰가 메모리에 로드되었을 때 호출
+    - viewWillAppear : 뷰가 화면에 표시되기 전에, 매번 호출
+    - viewDidAppear :
+        - 뷰가 화면에 표시되었을때 호출
+        - 화면의 애니메이션 요소의 변화 담당
+        - (화면의 모든 구성 요소들이 표시되었을때 사용가능한 것)
+    - viewWillDisappear :
+        - 뷰가 뷰의 계층구조에서 사라질 때 호출.
+        - 뷰가 생성된 뒤 발생한 변화를 되돌릴 때 사용
+        - 최종적으로 데이터를 저장하는 작업을 여기서 수행 가능
+    - viewDidDisappear : 뷰가 뷰 계층에서 사라진 후 호출
 </details>
 <details>
-<summary></summary>
+<summary>TableView와 CollectionView의 차이점을 설명하시오.</summary>
+
+- TableView와 CollectionView의 차이점을 설명하시오.
+    - TableView는 단일 열에 배열된 행을 사용해 데이터를 표시하는 뷰이다.
+    - TableView는 UIScrollView를 상속받고 있다.
+    - CollectionView는 TableView의 모든 기능을 가지고 있다.
+    - 차이점
+    	- TableView는 하나의 열에 여러 행을 가질 수 있지만, CollectionView는 여러 열과 행을 가질 수 있다.
+    	- 따라서 cell 모양을 row에 맞추지 않고 자유롭게 디자인할 수 있다.
+    	- 수직/수평 스크롤 모두 가능하다.
 </details>
 <details>
-<summary></summary>
+<summary>Safearea에 대해서 설명하시오.</summary>
+
+- 아이폰에 노치와 홈바가 생긴 후, 이들 영역을 구분하기 위해 만들어진 영역
+- 시스템에 의해 가려질 수 있는 마진을 자체적으로 가진다.
+</details>
+
+### Jess
+<details>
+<summary>오토레이아웃을 코드로 작성하는 방법은 무엇인가? (3가지)</summary>
+
+**1) NSLayoutAnchor**
+
+- 특정 Anchot를 지정해서 오토레이아웃을 잡는 방식, NSLayoutConstraint를 사용해서 active 시킨다.
+- 사용하기 편하고, 가장 보편적으로 사용한다. 간결한 작성 방식으로 인한 뛰어난 가독성, type safety를 지원한다.
+
+**2) NSLayoutConstaint**
+
+- 오토레이아웃 방정식의 각 속성들을 지정하여 생성할 수 있다.
+- 직접적으로 제약에 관여하지 않는 파라미터까지 채워넣어 가독성이 떨어진다
+
+**3) Visual Format Language**
+
+- 기호 및 문자열로 레이아웃 관계 포시
+- 시각적으로 정의하기때문에 표현성이 좋으나, 모든 제약사항을 정의할 수 없다.
+
+**4) 이외에 SnapKit과 같은 라이브러리를 사용한다.**
+</details>
+<details>
+<summary>hugging, resistance에 대해서 설명하시오.</summary>
+
+**1) Hugging Priority**
+
+- 두 오브젝트 중 하나가 커져야 하는 상황에 우선순위가 높은 것이 자신의 크기를 유지하고, 우선순위가 더 낮은 것이 크기가 늘어난다.
+
+**2) Compression Resistance Priority**
+
+- 두 오브젝트 중 하나가 작아져야 하는 상황에 우선순위가 높은 것이 자신의 크기를 유지하고, 우선순위가 낮은것이 크기가 작아진다.
+</details>
+<details>
+<summary>Left Constraint 와 Leading Constraint 의 차이점을 설명하시오.</summary>
+
+**Leading / Trailing**
+
+- 설정 국가에 따라 지정된 레이아웃이 읽기 방향에 따라 조정되는 제약사항
+- 왼쪽에서 오른쪽 레이아웃을 가진 한국에서는 오른쪽으로 이동하며 값이 증가한다.
+- Left Constraint는 어떤 객체의 왼쪽을 뜻하고, Leading Constraint는 객체의 앞쪽 가장자리를 뜻한다.
+- left, right 사용을 지양하고 leading과 trailing 사용을 권장한다.
+- `Left Constrint`와 `Right Constraint`는 절대적이며 항상 화면 또는 컨트롤의 왼쪽 / 오른쪽을 참조한다. `Leading Constraint`와 `Trailing Constraint`는 device locale의 영향을 받는다. (장치별 국가 설정)
+- 읽기 방향이 오른쪽에서 왼쪽인 locale(예: 히브리어, 아랍어)에서는 leading이 오른쪽이 되고 trailing이 왼쪽이 된다.
 </details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>Intrinsic Content Size에 대해서 설명하시오.</summary>
+
+View의 컨텐츠를 고려한 자연스러운 크기를 의미한다.  
+모든 View에 존재하는 것은 아님.  
+UIView 같은 경우 기본적으로 내용이 없는 빈 View이기 때문에 존재하지 않는다.  
+반면 대표적으로 Label이나 button 같은 경우 width 와 height에 대해 Intrinsic Content Size가 모두 존재한다.
 </details>
 <details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
+<summary>스토리보드를 이용했을때의 장단점을 설명하시오.</summary>
+
+### 장점
+
+시각적으로 UI 구성을 확인 할 수 있다. 결과물을 예측하기 쉬움.
+
+코드 작성에 비해 구현 난이도가 쉬움.
+
+뷰의 흐름을 한눈에 파악할 수 있다. 
+
+### 단점
+
+프로젝트 규모가 커질 경우 앱 빌드 성능이 저하된다.
+
+코드 구현에 비해 재사용성이 매우 떨어진다.
+
+협업시 스토리보드간의 충돌 가능성이 매우 높다.
 </details>
 </details>
 
@@ -1624,7 +1695,7 @@ static 키워드는 타입 속성이나 메서드를 선언할때 사용한다.
 class 키워드도 마찬가지로 static과 기능이 유사하나, class 키워드의 경우 해당 속성이나 메서드를 상속 가능하게 하여 재정의할수 있다.
 </details>
 </details>
-<details open>
+<details>
 <summary>3주차</summary>
 ### Jess
 <details>
@@ -1746,50 +1817,136 @@ class 키워드도 마찬가지로 static과 기능이 유사하나, class 키�
 self는 인스턴스 자체를 가르키며, Self는 타입을 의미한다.
 </details>
 </details>
-<details>
+<details open>
 <summary>4주차</summary>
-### Jess
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-
-### Haha
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
-<details>
-<summary></summary>
-</details>
 
 ### John
 <details>
-<summary></summary>
+<summary>@available과 #availabe 의 차이는 무엇인가?</summary>
+
+- @available는 타입, 속성, 메서드 앞에 작성. 컴파일러가 API의 사용 가능성을 결정한다.
+- (#available)은 조건문에서 작성. 런타임에서 API 사용가능성을 결정한다.
 </details>
 <details>
-<summary></summary>
+<summary>caseIterate 프로토콜은 무엇인가?</summary>
+
+연관괎이 없는 열거형의 경우, 해당 프로토콜을 채택하면 case들의 배열을 반환하는 allCases 타입속성 사용 가능
 </details>
 <details>
-<summary></summary>
+<summary>비동기함수를 설계할 때 return보다 콜백함수의 활용이 권장된다. 그 이유는?</summary>
+
+함수 내부의 비동기처리가 끝내기 전에 이미 함수가 return값을 nil로 반환해버릴 수 있음.
+</details>
+<details>
+<summary>비동기코드를 사용할 때 강한참조를 주의해야 한다. 그 이유는?</summary>
+
+- 비동기처리 시 클로저는 외부 객체를 사용하기 위한 self의 종료를 기다리고, self 객체는 클로저의 종료를 기다리는 강한 참조의 위험이 있다.
+- 대부분의 경우 캡처리스트 안에서 [weak self] 사용 권장
+</details>
+<details>
+<summary>데이터를 다루는 함수 중 URLSession과 같은 네트워킹 함수와, Data(contentsOf:url:)의 데이터를 바루는 방식의 차이는 무엇인가?</summary>
+
+이미 비동기적으로 구현된 함수들(주로 네트워킹 함수들. URLSession 등)과 데이터 소환 때 비동기처리가 필요한 케이스(Data(contentsOF:url) 등) 주의
+</details>
+
+### Jess
+<details>
+<summary>Hashble이 자체적으로 Equatable을 준수하는 이유는?</summary>
+
+- [https://babbab2.tistory.com/149](https://babbab2.tistory.com/149)
+- 다른 객체가 동일한 해시를 가질 수 있기 때문에 먼저 해시값을 비교하고, 해시 값이 같다면 `==` 연산들 통해 객체를 비교한다.
+</details>
+<details>
+<summary>멀티 프로세스와 멀티 쓰레드의 차이와 장단점을 간단하게 설명하세요. </summary>
+
+- [https://babbab2.tistory.com/63](https://babbab2.tistory.com/63)
+- [https://babbab2.tistory.com/64](https://babbab2.tistory.com/64)
+- [https://lucky516.tistory.com/207](https://lucky516.tistory.com/207)
+- **멀티 프로세스**  
+하나의 프로그램을 여러개의 프로세스로 구성하여, 각 **프로세스**마다 하나의 작업(Task)씩 처리하도록 하는 것이다.  
+독립된 구조이기에 안정성이 높으나, Context Switching 시 시간이 많이 소요되는 등 오버헤드가 발생한다.
+- **멀티 쓰레드**  
+하나의 프로그램을 여러 개의 쓰레드로 구성하여, 각 **쓰레드**마다 하나의 작업(Taks)씩 처리하도록 하는 것.   
+Context Switching이 빠르고, 생성,종료 시간도 빠르다. 프로세스간 자원 공유가 간단하다,
+하지만 동기화에 문제가 있고, 하나의 스레드에서 문제 발생 시 전체 스레드에 영향이 간다.
+</details>
+<details>
+<summary>약한참조는 왜 상수에서 쓰일 수 없을까요?</summary>
+
+- 자신이 참조하던 인스턴스가 메모리에서 해제된다면 nil이 할당될 수 있어야 하기 때문
+- 약한 참조를 할 때에는 자신의 값을 변경할 수 있는 변수로 선언해야 한다.
+- 더불어, nil이 할당될 수 있어야 하므로 항상 옵셔널이어야 한다. (즉 옵셔널 변수만 약한 참조를 할 수 있다)
+</details>
+<details>
+<summary>where절에 대해 간단히 설명하세요.</summary>
+
+- 크게 두 가지의 용도로 사용된다.
+    
+    1) swift의 패턴들과 결합하여 조건 추가 가능
+    
+    2) 확장과 제네릭에 사용함으로써 프로토콜 또는 타입에 대한 제약 추가 가능
+         예)
+    
+    ```swift
+    	extension Array where Element: FixedWidthInteger {
+        mutating func pop() -> Element { return self.removeLast() }
+    }
+    ```
+    
+    이렇게 타입 파라미터 `Element`가 `FixedWidthInteger`라는 프로토콜을 준수해야한다 라는 제약을 주면,
+    
+    ```swift
+    let nums = [1, 2, 3]
+    let strs = ["a", "b", "c"]
+     
+    nums.pop()              // O
+    strs.pop()              // X
+    ```
+    
+    `FixedWidthInteger` 프로토콜을 준수하는 Array<Int> 형인 nums는 extension에서 구현된 pop() 을 사용할 수 있지만, strs는 사용할 수 없음.
+</details>
+<details>
+<summary>제네릭 타입을 사용하는 이유에 대해 설명하세요.</summary>
+
+- 제네릭 타입을 구현하면 구조체, 클래스, 열거형 등이 어떤 타입과도 연관되어 동작할 수 있다.
+- 제네릭 타입을 정해주면 그 타입에만 동작하도록 제한할 수 있어 안전하고, 의도한대로 기능을 사용하도록 유도가능하다.
 </details>
 
 ### Kyle
 <details>
-<summary></summary>
+<summary>defer에 대해 간단히 설명해주세요.</summary>
+
+해당 스코프 내에서 가장 마지막에 실행되는 구문
 </details>
 <details>
-<summary></summary>
+<summary>defer가 호출되는 순서는 어떻게 되고, defer가 호출되지 않는 경우를 설명하세요.</summary>
+
+defer문은 해당하는 스코프 내에서 가장 마지막에 실행된다.  
+하나의 함수에서 여러번 defer를 호출 가능하며,  
+실행 순서는 가장 마지막에 실행된 defer부터 역순으로 실행된다.  
+중첩으로도 사용이 가능하며, 실행 순서는 가장 바깥쪽 defer부터 실행된다.  
+defer문이 실행되기 전에 함수가 종료될 경우 defer문이 호출되지 않음.
 </details>
 <details>
-<summary></summary>
+<summary>generic에대해 설명해 주세요.</summary>
+
+타입(형식)에 관계없이 하나의 정의로 모든 타입을 처리할 수 있는 범용적인 문법.  
+유지보수가 쉽고, 재사용성이 높은 함수,구조체,클래스,열거형 등을 일반화 가능한 코드로 작성할 수 있다.  
+프로토콜에서 generic을 사용하는 경우, 프로토콜 내부에 associatedtype을 쓰고, 프로토콜 내부에 사용할 범용 타입의 이름을 선언해 사용한다.
+</details>
+<details>
+<summary>강한 참조 사이클로 인한 메모리 누수 해결방안인 weak, unowned 키워드의 차이점에 대해 설명하시오.</summary>
+
+weak은 가르키는 인스턴스가 메모리 해제될 경우 자동적으로 nil값을 할당받는다.  
+소유자에 비해 가르키는 인스턴스의 생명주기가 짧을때 주로 사용한다.  
+unowned는 가르키는 인스턴스가 메모리 해제되어도 자동적으로 nil을 할당받지 못한다.  
+따라서 소유자에 비해 가르키는 인스턴스의 생명주기가 길때 주로 사용한다.  
+</details>
+<details>
+<summary>Hashable 프로토콜에 대해서 설명해보세요.</summary>
+
+- Hashable 프로토콜을 채택하는 타입은 모두 값을 정수인 해시값으로 표현 가능.
+- 스위프트의 기본 타입 중 문자열, 정수, 실수, 불리언, 컬렉션 타입이 Hashable 프로토콜을 채택함.
 </details>
 </details>
 
@@ -2205,5 +2362,48 @@ Result 타입이란 기존에 에러를 외부로 따로 던져 처리하는 것
 <summary>Hashable 프로토콜을 채택하는 커스텀 타입이 Equtable도 채택해야하는 이유가 무엇인가요?</summary>
 
 Hashable은 고유 값을 식별할 수 있는 “==” 함수가 필요한데, 이 함수는 Equtable 프로토콜 안에 들어있기 때문에 채택해야 한다.
+</details>
+
+#### 12월 28일
+
+<details>
+<summary>Result 타입을 활용할 수 있는 메서드 중 아는 것들을 간단하게 설명하세요.</summary>
+
+Result.get() 성공을 throw  
+Result.map() 성공을 원하는 대로 mapping한 후 throw
+</details>
+<details>
+<summary>defer가 호출되는 순서는 어떻게 되고, defer가 호출되지 않는 경우를 설명하세요.</summary>
+
+같은 스코프에서 여러번 defer문이 호출 될 경우 가장 마지막에 호출된 defer문 부터 역순으로 실행.  
+defer문이 중첩되어 사용 될 경우, 가장 바깥 쪽에 있는 defer문 부터 실행.  
+defer문이 호출되기 전 함수가 종료되면 defer문은 호출되지 않는다.
+</details>
+<details>
+<summary>generic이란 무엇인지,프로토콜에서의 generic 사용법에 대해 간단히 서술하세요.</summary>
+
+사용시 다양한 타입을 범용적으로 사용할 수 있는 타입이다.  
+프로토콜에서 사용할 경우 <> 대신 assosiatedType 키워드를 사용한다.
+</details>
+
+#### 12월 29일
+
+<details>
+<summary>UI를 메인쓰레드에서 업데이트해야하는 이유는 무엇인가?</summary>
+
+UIKit의 여러가지 속성들은 이미 긴밀하게 서로 연결되어 있기 때문에, UIKit을 thread-safe하게 만드는 것은 사실상 불가능하다.   
+이러한 이유 때문에 여러 thread에서 동시에 접근할 경우 충돌이 발생 할 수 있다.  
+따라서 UI를 업데이트 하거나 관련된 작업을 하는 경우 main 큐에 작업을 모두 모아 thread-safe하게 UI 작업을 할수 있기 때문에 UI를 메인쓰레드에서 업데이트 해야한다.
+</details>
+<details>
+<summary>접근제어가 필요한 이유는 무엇인가?</summary>
+
+여러명의 사람이 하나의 코드를 공유할때, 접근제어를 설정함으로써 해당 코드들의 역할과 사용을 명백하게 확인할수 있다.  
+접근제어를 통해 컴파일 속도의 이점을 얻을 수 있다.
+</details>
+<details>
+<summary>Never 타입에 대해 설명하세요.</summary>
+
+함수의 제어권을 전달하지 않는 타입
 </details>
 </details>
