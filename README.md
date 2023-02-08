@@ -1817,7 +1817,7 @@ class 키워드도 마찬가지로 static과 기능이 유사하나, class 키�
 self는 인스턴스 자체를 가르키며, Self는 타입을 의미한다.
 </details>
 </details>
-<details open>
+<details>
 <summary>4주차</summary>
 
 ### John
